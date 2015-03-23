@@ -22,7 +22,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     && apt-get clean \
     && sed -i -r "s/^#(listen_addresses = ')[0-9A-Za-z\.]*('.*)$/\1\*\2/g" /etc/postgresql/9.4/main/postgresql.conf \
     && echo 'host all all 0.0.0.0/0 md5' >> /etc/postgresql/9.4/main/pg_hba.conf \
-    && mv /var/lib/postgresql /var/lib/postgres-template
+    && cp -Rf /var/lib/postgresql /var/lib/postgres-template
 
 
 ADD run.sh /usr/local/bin/run.sh
