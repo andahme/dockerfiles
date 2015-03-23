@@ -1,4 +1,4 @@
-FROM registry:5000/andahme/base
+FROM andahme/debian
 
 
 EXPOSE 5432
