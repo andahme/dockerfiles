@@ -3,7 +3,7 @@ FROM andahme/jre
 
 EXPOSE 7199 7000 7001 9160 9042
 
-VOLUME [/var/lib/cassandra"]
+VOLUME ["/var/lib/cassandra"]
 
 CMD ["run.sh"]
 
