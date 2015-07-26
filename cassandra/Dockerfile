@@ -10,7 +10,7 @@ CMD ["run.sh"]
 
 RUN adduser --system --home /var/lib/cassandra --no-create-home --shell /bin/bash --uid 444 --group --gecos "Cassandra administrator" cassandra
 
-RUN echo "deb http://www.apache.org/dist/cassandra/debian 21x main" > /etc/apt/sources.list.d/cassandra.list \
+RUN echo "deb http://www.apache.org/dist/cassandra/debian 22x main" > /etc/apt/sources.list.d/cassandra.list \
     && apt-get update \
     && apt-get install -y --force-yes --no-install-recommends cassandra \
     && apt-get clean 
