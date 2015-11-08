@@ -1,7 +1,7 @@
 FROM andahme/debian
 
 
-RUN echo "deb http://s3.andah.me/debian testing non-free" >> /etc/apt/sources.list.d/andahme.list
+RUN echo "deb http://repo.andah.me/debian testing non-free" >> /etc/apt/sources.list.d/andahme.list
 
 RUN DEBIAN_FRONTEND=noninteractive \
     apt-get update \
