@@ -11,3 +11,6 @@ RUN DEBIAN_FRONTEND=noninteractive \
 
 ENV JAVA_HOME /usr/lib/jvm/jre-8-oracle-x64
 
+ENV PATH $PATH:$JAVA_HOME/bin
+
+
