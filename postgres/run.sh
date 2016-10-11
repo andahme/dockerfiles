@@ -13,5 +13,5 @@ else
 fi
 
 
-/usr/lib/postgresql/9.5/bin/postgres -c config-file=/etc/postgresql/9.5/main/postgresql.conf
+exec /usr/lib/postgresql/${PG_MAJOR}/bin/postgres -c config-file=/etc/postgresql/${PG_MAJOR}/main/postgresql.conf
 
