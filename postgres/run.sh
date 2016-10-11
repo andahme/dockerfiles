@@ -1,13 +1,14 @@
 #!/bin/bash
 
 
-PG_TEST_FILE="/var/lib/postgresql/9.5/main/PG_VERSION"
+PG_TEST_FILE="/var/lib/postgresql/${PG_MAJOR}/main/PG_VERSION"
 
 
 if [ -e "${PG_TEST_FILE}" ]; then
-    echo "Detected Existing Database..."
+    echo "Located Existing Database..."
 else
-    echo "Run this image with the init tag to initialize a database."
+    echo "Unable to locate PG_VERSION file."
+
     exit 1
 fi
 
