@@ -1,17 +1,21 @@
-#!/bin/bash
+#!/bin/bash -e
 
+if [ "$1" == "initdb" ]; then
+    shift
 
-PG_TEST_FILE="/var/lib/postgresql/${PG_MAJOR}/main/PG_VERSION"
+    echo Creating cluster...
 
+    pg_createcluster ${PG_MAJOR} main -- $@
 
-if [ -e "${PG_TEST_FILE}" ]; then
-    echo "Located Existing Database..."
+    sed -i -r "s/^#(listen_addresses = ')[0-9A-Za-z\.]*(').*$/\1\*\2/g" /etc/postgresql/${PG_MAJOR}/main/postgresql.conf
+
+    echo host all all 0.0.0.0/0 md5 >> /etc/postgresql/${PG_MAJOR}/main/pg_hba.conf
+
+    echo Creation complete.
+elif [ -e "/var/lib/postgresql/${PG_MAJOR}/main/PG_VERSION" ]; then
+    exec /usr/lib/postgresql/${PG_MAJOR}/bin/postgres -c config-file=/etc/postgresql/${PG_MAJOR}/main/postgresql.conf
 else
-    echo "Unable to locate PG_VERSION file."
+    echo Database not found.
 
     exit 1
 fi
-
-
-exec /usr/lib/postgresql/${PG_MAJOR}/bin/postgres -c config-file=/etc/postgresql/${PG_MAJOR}/main/postgresql.conf
-

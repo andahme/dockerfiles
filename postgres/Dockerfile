@@ -1,15 +1,19 @@
 FROM andahme/debian
 
 
+ENV PG_MAJOR 9.6
+
 EXPOSE 5432
+
 
 VOLUME ["/etc/postgresql"]
 VOLUME ["/var/lib/postgresql"]
 
-CMD ["run.sh"]
 
+ADD run.sh /usr/local/bin/run.sh
 
-ENV PG_MAJOR 9.6
+ENTRYPOINT ["run.sh"]
+
 
 RUN DEBIAN_FRONTEND=noninteractive \
     apt-get update \
@@ -19,9 +23,6 @@ RUN DEBIAN_FRONTEND=noninteractive \
     && apt-get install -y --force-yes --no-install-recommends postgresql-${PG_MAJOR} \
     && apt-get clean
 
-
-ADD run.sh /usr/local/bin/run.sh
-RUN chmod +x /usr/local/bin/run.sh
 
 USER postgres
 
