@@ -1,4 +1,4 @@
-FROM andahme/debian
+FROM andahme/build-essential
 
 
 RUN echo deb http://deb.nodesource.com/node_7.x jessie main > /etc/apt/sources.list.d/nodesource.list
