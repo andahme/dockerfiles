@@ -17,6 +17,7 @@ docker run -it --name ${DATA_VOLUME} --user root \
 ```
 
 ## Start PostgreSQL Server
+**NOTE**: To expose on a host interface, include a publish option (`-P` or `-p 5432:5432`).
 ```bash
 docker run -d --name ${PG_CONTAINER} --volumes-from=${DATA_VOLUME} \
     andahme/postgres
@@ -28,3 +29,4 @@ docker run -d --name ${PG_CONTAINER} --volumes-from=${DATA_VOLUME} \
 docker run -it --link ${PG_CONTAINER}:DB \
     andahme/postgres psql
 ```
+
