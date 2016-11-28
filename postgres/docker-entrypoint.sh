@@ -9,6 +9,8 @@ if [[ $1 == initdb ]]; then
     sed -i -r "s/^#(listen_addresses = ')[0-9A-Za-z\.]*(').*$/\1\*\2/g" /etc/postgresql/${PG_MAJOR}/main/postgresql.conf
 elif [[ $1 == single ]]; then
     exec /usr/lib/postgresql/${PG_MAJOR}/bin/postgres --single -c config-file=/etc/postgresql/${PG_MAJOR}/main/postgresql.conf
+elif [[ $# > 0 ]]; then
+    exec $@
 elif [[ -e /var/lib/postgresql/${PG_MAJOR}/main/PG_VERSION ]]; then
     exec /usr/lib/postgresql/${PG_MAJOR}/bin/postgres -c config-file=/etc/postgresql/${PG_MAJOR}/main/postgresql.conf
 else
