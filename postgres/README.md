@@ -8,25 +8,23 @@ export DATA_VOLUME="testing_data"
 export PG_CONTAINER="testing_pg"
 ```
 
-## Initialize Cluster
-**NOTE**: Options following `initdb` will be passed along to `pg_createcluster`.
-
-### With Docker Data Volume
+## Create PostgreSQL Cluster
+**NOTE**: Cluster creation must include a user override (`root`).
+**NOTE**: Cluster creation will prompt for a password.
 ```bash
 docker run -it --name ${DATA_VOLUME} --user root \
-    andahme/postgres initdb --pwprompt
+    andahme/postgres initdb
 ```
 
-### With Local Filesystem Mapping
-**NOTE**: Using a Docker container to anchor a local filesystem mapping is not required.
+## Start PostgreSQL Server
 ```bash
-docker run -it --name ${DATA_VOLUME} --user root \
-    -v /etc/postgresql:/etc/postgresql -v /var/lib/postgresql:/var/lib/postgresql \
-    andahme/postgres initdb --pwprompt
-```
-
-## Start Postgres
-```bash
-docker run -it --name ${PG_CONTAINER} --volumes-from=${DATA_VOLUME} -p 5432:5432 \
+docker run -d --name ${PG_CONTAINER} --volumes-from=${DATA_VOLUME} \
     andahme/postgres
+```
+
+## Connect with PostgreSQL Client
+**NOTE** If a link (alias `DB`) is present, `host` (`-h`) and `port` (`-p`) will be provided to `psql`.
+```bash
+docker run -it --link ${PG_CONTAINER}:DB \
+    andahme/postgres psql
 ```
