@@ -7,12 +7,13 @@ EXPOSE 5432
 
 
 VOLUME ["/etc/postgresql"]
+
 VOLUME ["/var/lib/postgresql"]
 
 
-ADD run.sh /usr/local/bin/run.sh
+ADD docker-entrypoint.sh /docker-entrypoint.sh
 
-ENTRYPOINT ["run.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
 
 RUN DEBIAN_FRONTEND=noninteractive \
