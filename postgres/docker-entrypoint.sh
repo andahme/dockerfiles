@@ -3,9 +3,7 @@
 if [ "$1" == "initdb" ]; then
     shift
 
-    echo Creating cluster...
-
-    pg_createcluster ${PG_MAJOR} main -- $@
+    pg_createcluster ${PG_MAJOR} main -- --pwprompt $@
 
     sed -i -r "s/^#(listen_addresses = ')[0-9A-Za-z\.]*(').*$/\1\*\2/g" /etc/postgresql/${PG_MAJOR}/main/postgresql.conf
 
