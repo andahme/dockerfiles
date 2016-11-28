@@ -3,6 +3,8 @@ FROM andahme/debian
 
 ENV PG_MAJOR 9.6
 
+ENV PSQLRC /usr/share/postgresql/${PG_MAJOR}/psqlrc
+
 EXPOSE 5432
 
 
@@ -22,6 +24,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     && sed -i -r "s/^#?(create_main_cluster = ).*$/\1false/g" /etc/postgresql-common/createcluster.conf \
     && sed -i -r "s/^(stats_temp_directory =.*)$/#\1/g" /etc/postgresql-common/createcluster.conf \
     && apt-get install -y --force-yes --no-install-recommends postgresql-${PG_MAJOR} \
+    && echo "\set HISTFILE /dev/null" > ${PSQLRC} \
     && apt-get clean
 
 
