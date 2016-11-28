@@ -15,7 +15,8 @@ if [ "$1" == "initdb" ]; then
 elif [ -e "/var/lib/postgresql/${PG_MAJOR}/main/PG_VERSION" ]; then
     exec /usr/lib/postgresql/${PG_MAJOR}/bin/postgres -c config-file=/etc/postgresql/${PG_MAJOR}/main/postgresql.conf
 else
-    echo Database not found.
+    echo Database not found.  Starting interactive shell...
 
-    exit 1
+    exec /bin/bash
 fi
+
