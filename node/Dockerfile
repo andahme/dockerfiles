@@ -5,6 +5,5 @@ RUN echo deb http://deb.nodesource.com/node_7.x jessie main > /etc/apt/sources.l
 
 RUN DEBIAN_FRONTEND=noninteractive \
     apt-get update -- \
-    && apt-get install -y --force-yes --no-install-recommends nodejs \
-    && apt-get clean
+    && apt-get install -y --force-yes --no-install-recommends nodejs
 
