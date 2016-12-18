@@ -1,9 +1,7 @@
-FROM andahme/jre
+FROM andahme/openjdk:jre
 
 
 EXPOSE 2181
-
-CMD ["/usr/share/zookeeper/bin/zkServer.sh", "start-foreground"]
 
 
 RUN DEBIAN_FRONTEND=noninteractive \
@@ -13,4 +11,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
 
 
 VOLUME ["/var/lib/zookeeper"]
+
+
+CMD ["/usr/share/zookeeper/bin/zkServer.sh", "start-foreground"]
 
