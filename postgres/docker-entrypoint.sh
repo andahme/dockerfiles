@@ -1,9 +1,5 @@
 #!/bin/bash -e
 
-if [[ $# == 0 ]]; then
-    exec /usr/lib/postgresql/${PG_MAJOR}/bin/postgres -c config-file=/etc/postgresql/${PG_MAJOR}/main/postgresql.conf
-fi
-
 COMMAND=$1; shift
 case ${COMMAND} in
     initdb)
@@ -16,8 +12,8 @@ case ${COMMAND} in
         exec /usr/lib/postgresql/${PG_MAJOR}/bin/postgres -c config-file=/etc/postgresql/${PG_MAJOR}/main/postgresql.conf $@
         ;;
     psql)
-        if [ "${DB_PORT_5432_TCP_ADDR}" -a "${DB_PORT_5432_TCP_PORT}" ]; then
-            exec psql -h ${DB_PORT_5432_TCP_ADDR} -p ${DB_PORT_5432_TCP_PORT} $@
+        if [ "${PG_PORT_5432_TCP_ADDR}" -a "${PG_PORT_5432_TCP_PORT}" ]; then
+            exec psql -h ${PG_PORT_5432_TCP_ADDR} -p ${PG_PORT_5432_TCP_PORT} $@
         else
             exec psql $@
         fi

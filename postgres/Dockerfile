@@ -28,12 +28,15 @@ RUN DEBIAN_FRONTEND=noninteractive \
 
 ADD docker-entrypoint.sh /
 
-ENTRYPOINT [ "/docker-entrypoint.sh" ]
-
 
 VOLUME [ "/etc/postgresql" ]
 
 VOLUME [ "/var/lib/postgresql" ]
+
+
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
+
+CMD [ "postgres" ]
 
 
 USER postgres
