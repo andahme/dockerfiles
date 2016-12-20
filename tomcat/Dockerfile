@@ -1,19 +1,22 @@
-FROM andahme/jre
+FROM andahme/openjdk:jre
 
 
-EXPOSE 8009 8080
+EXPOSE 8080
 
-CMD ["/usr/share/tomcat7/bin/catalina.sh", "run"]
 
-ENV CATALINA_HOME /usr/share/tomcat7
-ENV CATALINA_BASE /var/lib/tomcat7
+ENV CATALINA_BASE /var/lib/tomcat8
 
-WORKDIR /usr/share/tomcat7
+ENV CATALINA_HOME /usr/share/tomcat8
 
 
 RUN DEBIAN_FRONTEND=noninteractive \
     apt-get update \
-    && apt-get install -y --force-yes --no-install-recommends tomcat7 \
-    && apt-get clean
+    && apt-get install -y --force-yes --no-install-recommends libservlet3.1-java tomcat8
+
+
+VOLUME [ "/var/lib/tomcat8" ]
+
+
+CMD [ "/usr/share/tomcat8/bin/catalina.sh", "run" ]
 
 
