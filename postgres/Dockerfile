@@ -4,7 +4,7 @@ FROM andahme/debian
 EXPOSE 5432
 
 
-ENV PG_MAJOR 9.6
+ENV PG_MAJOR 10
 
 ENV PGDATA /var/lib/postgresql/${PG_MAJOR}/main
 
