@@ -16,7 +16,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     && apt-get install --yes --no-install-recommends postgresql-common \
     && sed -i -r "s/^#?(create_main_cluster = ).*$/\1false/g" /etc/postgresql-common/createcluster.conf \
     && sed -i -r "s/^(stats_temp_directory =.*)$/#\1/g" /etc/postgresql-common/createcluster.conf \
-    && apt-get install -y --force-yes --no-install-recommends postgresql-${PG_MAJOR} \
+    && apt-get install --yes --no-install-recommends postgresql-${PG_MAJOR} \
     && sed -i -r "s/^#?(listen_addresses = ).*/\1'*'/g" /usr/share/postgresql/${PG_MAJOR}/postgresql.conf.sample \
     && sed -i -r "s/127\.0\.0\.1\/32/0\.0\.0\.0\/0   /g" /usr/share/postgresql/${PG_MAJOR}/pg_hba.conf.sample \
     && echo "\set HISTFILE /dev/null" > ${PSQLRC} \
