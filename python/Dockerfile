@@ -3,6 +3,6 @@ FROM andahme/build-essential
 
 RUN DEBIAN_FRONTEND=noninteractive \
     apt-get update \
-    && apt-get install --yes --no-install-recommends python python-dev python-pip python-setuptools python-wheel
+    && apt-get install --yes --no-install-recommends python3 python3-dev python3-pip python3-setuptools python3-wheel
 
 
