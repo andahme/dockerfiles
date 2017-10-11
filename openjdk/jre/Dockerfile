@@ -1,7 +1,7 @@
 FROM andahme/debian
 
 
-ENV JAVA_HOME /usr/lib/jvm/java-9-openjdk-amd64/jre
+ENV JAVA_HOME /usr/lib/jvm/java-9-openjdk-amd64
 
 
 RUN DEBIAN_FRONTEND=noninteractive \
