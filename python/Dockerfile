@@ -1,8 +1,12 @@
 FROM andahme/build-essential
 
 
+USER root
+
 RUN DEBIAN_FRONTEND=noninteractive \
     apt-get update \
     && apt-get install --yes --no-install-recommends python3 python3-dev python3-pip python3-setuptools python3-wheel
+
+USER builder
 
 
