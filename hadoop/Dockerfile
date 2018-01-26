@@ -13,14 +13,14 @@ ARG INPUT_HADOOP_VERSION
 
 ADD ${INPUT_HADOOP_ARTIFACT} /tmp/hadoop-${INPUT_HADOOP_VERSION}.tar.gz
 
-RUN tar -zxf /tmp/hadoop-${INPUT_HADOOP_VERSION}.tar.gz -C /opt --strip-component=1 && \
+RUN tar -zxf /tmp/hadoop-${INPUT_HADOOP_VERSION}.tar.gz -C /opt --strip-component=1 --exclude=share/doc && \
     mv /opt/etc/hadoop /etc/hadoop && \
     chmod -R 777 /etc/hadoop
 
 
 
 # TARGET: IMAGE
-FROM andahme/openjdk:jre-8 AS hadoop
+FROM andahme/openjdk:jre-8 AS image
 
 ARG INPUT_HADOOP_VERSION
 
