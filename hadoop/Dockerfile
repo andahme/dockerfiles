@@ -1,4 +1,4 @@
-ARG INPUT_HADOOP_VERSION=2.9.0
+ARG INPUT_HADOOP_VERSION=3.0.0
 
 ARG INPUT_HADOOP_ARTIFACT=http://apache.spinellicreations.com/hadoop/common/hadoop-${INPUT_HADOOP_VERSION}/hadoop-${INPUT_HADOOP_VERSION}.tar.gz
 
@@ -13,8 +13,10 @@ ARG INPUT_HADOOP_VERSION
 
 ADD ${INPUT_HADOOP_ARTIFACT} /tmp/hadoop-${INPUT_HADOOP_VERSION}.tar.gz
 
-RUN tar -zxf /tmp/hadoop-${INPUT_HADOOP_VERSION}.tar.gz -C /opt --strip-component=1 --exclude=share/doc && \
-    mv /opt/etc/hadoop /etc/hadoop && \
+RUN tar -zxf /tmp/hadoop-${INPUT_HADOOP_VERSION}.tar.gz -C /opt --strip-component=1 \
+    --exclude=share/doc
+
+RUN mv /opt/etc/hadoop /etc/hadoop && \
     chmod -R 777 /etc/hadoop
 
 
@@ -29,7 +31,7 @@ ENV HADOOP_CONF_DIR /etc/hadoop
 
 ENV HADOOP_HOME /opt/hadoop-${INPUT_HADOOP_VERSION}
 
-ENV LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:${HADOOP_HOME}/lib/native
+ENV LD_LIBRARY_PATH ${HADOOP_HOME}/lib/native:${LD_LIBRARY_PATH}
 
 ENV PATH ${HADOOP_HOME}/bin:${PATH}
 
@@ -43,7 +45,4 @@ RUN mkdir /var/log/hadoop && \
     chmod 777 /var/log/hadoop && \
     ln -s ${HADOOP_CONF_DIR} ${HADOOP_HOME}/etc/hadoop && \
     ln -s /var/log/hadoop ${HADOOP_HOME}/logs
-
-
-VOLUME /tmp
 
