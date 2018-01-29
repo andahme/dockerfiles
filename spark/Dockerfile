@@ -1,12 +1,12 @@
 ARG INPUT_SPARK_VERSION=2.2.1
 
-ARG INPUT_MARIA_JDBC_VERSION=2.2.1
-
-ARG INPUT_POSTGRES_JDBC_VERSION=42.2.0
-
 ARG INPUT_SPARK_ARTIFACT=http://apache.spinellicreations.com/spark/spark-${INPUT_SPARK_VERSION}/spark-${INPUT_SPARK_VERSION}-bin-hadoop2.7.tgz
 
+ARG INPUT_MARIA_JDBC_VERSION=2.2.1
+
 ARG INPUT_MARIA_JDBC_ARTIFACT=https://downloads.mariadb.com/Connectors/java/connector-java-${INPUT_MARIA_JDBC_VERSION}/mariadb-java-client-${INPUT_MARIA_JDBC_VERSION}.jar
+
+ARG INPUT_POSTGRES_JDBC_VERSION=42.2.0
 
 ARG INPUT_POSTGRES_JDBC_ARTIFACT=https://jdbc.postgresql.org/download/postgresql-${INPUT_POSTGRES_JDBC_VERSION}.jar
 
