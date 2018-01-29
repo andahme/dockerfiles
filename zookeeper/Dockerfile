@@ -4,7 +4,6 @@ ARG INPUT_ZOOKEEPER_ARTIFACT=http://apache.mirrors.tds.net/zookeeper/zookeeper-$
 
 
 
-# TARGET: DISTRIBUTION
 FROM andahme/debian AS distribution
 
 ARG INPUT_ZOOKEEPER_ARTIFACT
@@ -19,38 +18,40 @@ RUN tar -zxf /tmp/zookeeper-${INPUT_ZOOKEEPER_VERSION}.tar.gz -C /opt --strip-co
 
 
 
-# TARGET: IMAGE
 FROM andahme/openjdk:jre-8 AS image
 
 ARG INPUT_ZOOKEEPER_VERSION
 
 
-ENV ZOOKEEPER_HOME /opt/zookeeper-${INPUT_ZOOKEEPER_VERSION}
+EXPOSE 2181
+
+
+ENV ZOOKEEPER_HOME /opt/zookeeper
+
+ENV ZOOKEEPER__MYID 1
 
 ENV PATH ${ZOOKEEPER_HOME}/bin:${PATH}
 
 
-ENV ZOOKEEPER_MY_ID 0
-
-
 COPY --from=distribution /opt ${ZOOKEEPER_HOME}
-
-RUN mkdir /var/lib/zookeeper \
-    && chown daemon /var/lib/zookeeper
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 
+RUN mkdir /var/lib/zookeeper && \
+    chmod 777 /var/lib/zookeeper && \
+    sed "s/^\\(dataDir=\\).*/\1\/var\/lib\/zookeeper/g" ${ZOOKEEPER_HOME}/conf/zoo_sample.cfg > ${ZOOKEEPER_HOME}/conf/zoo.cfg
+
+RUN useradd --comment "ZooKeeper User" --create-home --uid 1011 zookeeper
+
+
 VOLUME /var/lib/zookeeper
 
-
-WORKDIR ${ZOOKEEPER_HOME}
 
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
 CMD [ "zkServer.sh", "start-foreground" ]
 
 
-USER daemon
-
+USER zookeeper
 
