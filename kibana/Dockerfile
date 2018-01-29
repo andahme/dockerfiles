@@ -18,7 +18,7 @@ RUN tar -zxf /tmp/kibana-${KIBANA_VERSION}.tar.gz -C /opt --strip-component=1 &&
 
 
 
-FROM andahme/openjdk:jdk-8 AS image
+FROM andahme/debian AS image
 
 EXPOSE 5601
 
