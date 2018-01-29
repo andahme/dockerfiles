@@ -39,10 +39,13 @@ COPY --from=distribution /opt ${KIBANA_HOME}
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 
+RUN useradd --comment "Kibana Process User" --system --uid 511 kibana
+
+
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
 CMD [ "kibana" ]
 
 
-USER daemon
+USER kibana
 

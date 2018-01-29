@@ -49,6 +49,8 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN mkdir -p /data && \
     chmod 777 /data
 
+RUN useradd --comment "Elastic Process User" --system --uid 511 elastic
+
 
 VOLUME /data
 
@@ -58,5 +60,5 @@ ENTRYPOINT [ "/docker-entrypoint.sh" ]
 CMD [ "elasticsearch" ]
 
 
-USER daemon
+USER elastic
 
