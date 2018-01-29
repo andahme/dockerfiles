@@ -1,15 +1,15 @@
 # QuickStart: Server
 
-## Start ZooKeeper
+#### Start ZooKeeper
 ```bash
-docker run -d --name ${NETWORK}-zookeeper \
+docker run -d --name zookeeper \
   --network ${NETWORK} --network-alias zookeeper \
   andahme/zookeeper
 ```
 
-## Start Kafka
+#### Start Kafka
 ```bash
-docker run -it -d --name ${NETWORK}-kafka \
+docker run -d --name kafka \
   --network ${NETWORK} --network-alias kafka \
   andahme/kafka
 ```
@@ -26,18 +26,17 @@ docker run -it --rm \
   andahme/kafka /bin/bash
 ```
 
-
-# Client Operations
+## Client Operations
 
 #### List Topics
 ```bash
-kafka-topics.sh --zookeeper ${KAFKA_SERVER__ZOOKEEPER_CONNECT} \
+kafka-topics.sh --zookeeper ${KAFKA__ZOOKEEPER_CONNECT} \
   --list
 ```
 
 #### Create a Topic
 ```bash
-kafka-topics.sh --zookeeper ${KAFKA_SERVER__ZOOKEEPER_CONNECT} \
+kafka-topics.sh --zookeeper ${KAFKA__ZOOKEEPER_CONNECT} \
   --create \
   --partitions 1 \
   --replication-factor 1 \
@@ -47,7 +46,6 @@ kafka-topics.sh --zookeeper ${KAFKA_SERVER__ZOOKEEPER_CONNECT} \
 #### Start a Console Consumer
 ```bash
 kafka-console-consumer.sh --bootstrap-server ${KAFKA_SERVER} \
-  --from-beginning \
   --topic my_topic
 ```
 

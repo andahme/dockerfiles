@@ -28,13 +28,14 @@ FROM andahme/openjdk:jre-8 AS image
 ARG INPUT_KAFKA_VERSION
 
 
+EXPOSE 9092
+
+
 ENV KAFKA_HOME /opt/kafka
 
-ENV KAFKA_SERVER__BROKER_ID 0
+ENV KAFKA__BROKER_ID 0
 
-ENV KAFKA_SERVER__LOG_DIRS /var/lib/kafka
-
-ENV KAFKA_SERVER__ZOOKEEPER_CONNECT zookeeper:2181
+ENV KAFKA__ZOOKEEPER_CONNECT zookeeper:2181
 
 ENV PATH ${KAFKA_HOME}/bin:${PATH}
 
@@ -44,12 +45,14 @@ COPY --from=distribution /opt ${KAFKA_HOME}
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 
-RUN useradd --comment "Kafka User" --create-home --uid 1011 kafka && \
-    mkdir ${KAFKA_SERVER__LOG_DIRS} && \
-    chmod 777 ${KAFKA_SERVER__LOG_DIRS}
+RUN mkdir /var/lib/kafka && \
+    chmod 777 /var/lib/kafka && \
+    sed -i "s/^\\(log.dirs=\\).*/\1\/var\/lib\/kafka/g" ${KAFKA_HOME}/config/server.properties
+
+RUN useradd --comment "Kafka User" --create-home --uid 1011 kafka
 
 
-VOLUME ${KAFKA_SERVER__LOG_DIRS}
+VOLUME /var/lib/kafka
 
 
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
