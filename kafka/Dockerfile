@@ -15,11 +15,13 @@ ARG INPUT_KAFKA_VERSION
 
 ADD ${INPUT_KAFKA_ARTIFACT} /tmp/kafka-${INPUT_KAFKA_VERSION}.tar.gz
 
-RUN tar -zxf /tmp/kafka-${INPUT_KAFKA_VERSION}.tar.gz -C /opt --strip-component=1 && \
-    mkdir /opt/logs && \
-    chmod 777 /opt/config /opt/logs
+RUN tar -zxf /tmp/kafka-${INPUT_KAFKA_VERSION}.tar.gz -C /opt --strip-component=1 \
+    --exclude=site-docs
 
 COPY log4j.properties /opt/config/log4j.properties
+
+RUN mkdir /opt/logs && \
+    chmod 777 /opt/config /opt/logs
 
 
 
