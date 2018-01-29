@@ -13,8 +13,13 @@ ARG INPUT_ZOOKEEPER_VERSION
 
 ADD ${INPUT_ZOOKEEPER_ARTIFACT} /tmp/zookeeper-${INPUT_ZOOKEEPER_VERSION}.tar.gz
 
-RUN tar -zxf /tmp/zookeeper-${INPUT_ZOOKEEPER_VERSION}.tar.gz -C /opt --strip-component=1 && \
-    chmod 777 /opt/conf
+RUN tar -zxf /tmp/zookeeper-${INPUT_ZOOKEEPER_VERSION}.tar.gz -C /opt --strip-component=1 \
+    --exclude=contrib \
+    --exclude=docs \
+    --exclude=dist-maven \
+    --exclude=src
+
+RUN chmod 777 /opt/conf
 
 
 
