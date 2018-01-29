@@ -1,6 +1,6 @@
-# QuickStart
+## QuickStart
 
-## Start ZooKeeper
+### Start ZooKeeper
 ```bash
 docker run -d --name zookeeper \
   --network ${NETWORK} --network-alias zookeeper \
