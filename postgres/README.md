@@ -1,6 +1,5 @@
 ## Quick Start
 
-
 ### Server
 **NOTE**: Creates initial user (`postgres`) with password (`2345`).  
 **NOTE**: Creates a database (`postgres`) based on the default template.  
@@ -13,7 +12,7 @@ docker run -d --name postgres \
 ```
 
 ### Client
-**NOTE**: The default connection (`localhost`) is configured in the `PGHOST` environment variable.  
+**NOTE**: The default connection (`localhost`) is provided by the `PGHOST` environment variable.  
 ```bash
 docker run -it --rm \
   --network host \
@@ -31,15 +30,14 @@ docker run -it --rm \
   andahme/postgres postgres --single
 ```
 
-### Initialize a database
-**NOTE**: This creates and initializes a named (`pg-data`) data volume.  
+### Initialize a named (`pg-data`) data volume
 ```bash
 docker run -it --rm \
   --volume pg-data:/var/lib/postgresql \
-  andahme/postgres init
+  andahme/postgres initdb
 ```
 
-### Start postgres with a 
+### Server with a named (`pg-data`) data volume
 ```bash
 docker run -d --name postgres \
   --network ${NETWORK} --network-alias postgres \
