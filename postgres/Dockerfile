@@ -34,8 +34,10 @@ RUN DEBIAN_FRONTEND=noninteractive \
     apt-get install --yes --no-install-recommends postgresql-${PG_MAJOR} && \
     sed -i -r "s/127\.0\.0\.1\/32/0\.0\.0\.0\/0   /g" /usr/share/postgresql/${PG_MAJOR}/pg_hba.conf.sample && \
     sed -i -r -e "s/^#?(listen_addresses = ).*/\1'0.0.0.0'/g" -e "s/^#?(unix_socket_directories = )'.*'/\1''/g" /usr/share/postgresql/${PG_MAJOR}/postgresql.conf.sample && \
-    echo "\set HISTFILE /dev/null" > ${PSQLRC} && \
-    echo 2345 > /tmp/pg_password
+    mkdir -p /run/secrets && \
+    chmod 777 /run/secrets
+
+RUN echo "\set HISTFILE /dev/null" > ${PSQLRC}
 
 
 VOLUME [ "/var/lib/postgresql" ]

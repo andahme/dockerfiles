@@ -11,7 +11,12 @@ case ${COMMAND} in
         ;;
     postgres)
         if [ ! -d ${PGDATA} ]; then
-            echo "ANDAHME Initializing Database - INITDB_OPTIONS (${INITDB_OPTIONS:=--auth md5 --pwfile=/tmp/pg_password})"
+            if [ ! -f /run/secrets/pg_password ]; then
+                echo "ANDAHME Applying Configuration - INITDB_BOOTSTRAP_PASSWORD (********)"
+                echo ${INITDB_BOOTSTRAP_PASSWORD:-2345} > /run/secrets/pg_password
+            fi
+
+            echo "ANDAHME Initializing Database - INITDB_OPTIONS (${INITDB_OPTIONS:=--auth md5 --pwfile=/run/secrets/pg_password})"
             initdb ${INITDB_OPTIONS} | sed s/\ \-D.*logfile//g
         fi
 
