@@ -1,43 +1,48 @@
 ## Quick Start
 
-### Start a PostgreSQL Server (Data Volume Container)
-**NOTE**: Admin user `postgres`, initial password `2345`.  
-**NOTE**: Add port mapping (`-p 5432:5432`) to expose on host interface(s).  
-**NOTE**: Docker *data volumes* will be created for `/etc/postgresql` and `/var/lib/postgresql`.  
+
+### Server
+**NOTE**: Creates initial user (`postgres`) with password (`2345`).  
+**NOTE**: Creates a database (`postgres`) based on the default template.  
+**NOTE**: Add (`-e INITDB_OPTIONS="--auth trust"`) to initialize with no authentication.  
 ```bash
-docker run -d --name ${PG_CONTAINER} \
-    andahme/postgres
+docker run -d --name postgres \
+  --network ${NETWORK} --network-alias postgres \
+  --publish 127.0.0.1:5432:5432 \
+  andahme/postgres
 ```
+
+### Client
+**NOTE**: The default connection (`localhost`) is configured in the `PGHOST` environment variable.  
+```bash
+docker run -it --rm \
+  --network host \
+  andahme/postgres psql
+```
+
 
 ## Utilities
 
-### PostgreSQL Client (Container Link)
-**NOTE**: When a link alias (`PG`) is present, host (`-h`) and port (`-p`) parameters will be supplied to `psql`.  
+### Single-User Mode
+**NOTE**: Do not attempt to use on a running database.  
 ```bash
-docker run -it --link ${PG_CONTAINER}:PG \
-    andahme/postgres psql
+docker run -it --rm \
+  --volumes-from postgres \
+  andahme/postgres postgres --single
 ```
 
-### Single-User Mode (Mounted Data Volume)
-**NOTE**: Do not use while database is running.  
+### Initialize a database
+**NOTE**: This creates and initializes a named (`pg-data`) data volume.  
 ```bash
-docker run -it --volumes-from ${PG_CONTAINER} \
-    andahme/postgres single
+docker run -it --rm \
+  --volume pg-data:/var/lib/postgresql \
+  andahme/postgres init
 ```
 
-## Advanced
-
-### Create PostgreSQL Cluster (Data Volume Container)
-**NOTE**: The mounted directory volumes mask the bundled seed database.  
+### Start postgres with a 
 ```bash
-docker run -it --name ${DATA_VOLUME} --user root \
-    -v /etc/postgresql:/etc/postgresql \
-    -v /var/lib/postgresql:/var/lib/postgresql \
-    andahme/postgres initdb
-```
-
-### Start PostgreSQL Server (Mounted Data Volume)
-```bash
-docker run -d --name ${PG_CONTAINER} --volumes-from ${DATA_VOLUME} \
-    andahme/postgres
+docker run -d --name postgres \
+  --network ${NETWORK} --network-alias postgres \
+  --volume pg-data:/var/lib/postgresql \
+  andahme/postgres
 ```
