@@ -1,4 +1,4 @@
-ARG NODE_VERSION=9.3.0
+ARG NODE_VERSION=9.5.0
 
 ARG NODE_ARTIFACT=https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz
 
