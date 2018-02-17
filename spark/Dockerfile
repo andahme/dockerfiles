@@ -12,7 +12,6 @@ ARG INPUT_POSTGRES_JDBC_ARTIFACT=https://jdbc.postgresql.org/download/postgresql
 
 
 
-# TARGET: DISTRIBUTION
 FROM andahme/debian AS distribution
 
 ARG INPUT_SPARK_ARTIFACT
@@ -45,8 +44,7 @@ ADD ${INPUT_POSTGRES_JDBC_ARTIFACT} /opt/jars/postgresql-${INPUT_POSTGRES_JDBC_V
 
 
 
-# TARGET: IMAGE
-FROM andahme/openjdk:jre-8 AS image
+FROM andahme/openjdk:8-jre AS spark
 
 ARG INPUT_SPARK_VERSION
 
