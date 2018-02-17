@@ -22,7 +22,7 @@ RUN mv /opt/etc/hadoop /etc/hadoop && \
 
 
 # TARGET: IMAGE
-FROM andahme/openjdk:jre-8 AS image
+FROM andahme/openjdk:8-jre AS hadoop
 
 ARG INPUT_HADOOP_VERSION
 
