@@ -25,7 +25,7 @@ RUN mkdir /opt/logs && \
 
 
 
-FROM andahme/openjdk:jre-8 AS image
+FROM andahme/openjdk:8-jre AS kafka
 
 ARG INPUT_KAFKA_VERSION
 
@@ -33,13 +33,13 @@ ARG INPUT_KAFKA_VERSION
 EXPOSE 9092
 
 
+ENV BROKER_ID 1
+
 ENV KAFKA_HOME /opt/kafka
 
-ENV PATH ${KAFKA_HOME}/bin:${PATH}
-
-ENV BROKER_ID 0
-
 ENV ZOOKEEPER_CONNECT zookeeper:2181
+
+ENV PATH ${KAFKA_HOME}/bin:${PATH}
 
 
 COPY --from=distribution /opt ${KAFKA_HOME}
@@ -60,7 +60,6 @@ VOLUME /var/lib/kafka
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
 CMD [ "kafka-server-start.sh", "/opt/kafka/config/server.properties" ]
-
 
 USER kafka
 
