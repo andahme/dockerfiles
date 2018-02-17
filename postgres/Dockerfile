@@ -1,20 +1,24 @@
-FROM andahme/debian AS image
+ARG INPUT_PG_MAJOR=10
+
+
+
+FROM andahme/debian AS postgres-no-volume
+
+ARG INPUT_PG_MAJOR
 
 
 EXPOSE 5432
 
 
-ENV LANG en_US.UTF-8
+ENV PG_MAJOR ${INPUT_PG_MAJOR}
 
-ENV PG_MAJOR 10
-
-ENV PGHOST localhost
+ENV PGHOST postgres
 
 ENV PGDATA /var/lib/postgresql/${PG_MAJOR}/main
 
 ENV PSQLRC /usr/share/postgresql/${PG_MAJOR}/psqlrc
 
-ENV PATH /usr/lib/postgresql/${PG_MAJOR}/bin:${PATH}
+ENV PATH /usr/lib/postgresql/${PG_MAJOR}/bin/postgres:${PATH}
 
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
@@ -26,9 +30,12 @@ RUN DEBIAN_FRONTEND=noninteractive \
     sed -i -r "s/# (en_US.*)/\1/g" /etc/locale.gen && \
     locale-gen
 
+ENV LANG en_US.UTF-8
+
 RUN DEBIAN_FRONTEND=noninteractive \
     apt-get install --yes --no-install-recommends postgresql-common && \
-    sed -i -r "s/^#?(create_main_cluster = ).*$/\1false/g" /etc/postgresql-common/createcluster.conf
+    sed -i -r "s/^#?(create_main_cluster = ).*$/\1false/g" /etc/postgresql-common/createcluster.conf && \
+    ln -s /usr/lib/postgresql/10/bin/postgres /usr/bin/postgres
 
 RUN DEBIAN_FRONTEND=noninteractive \
     apt-get install --yes --no-install-recommends postgresql-${PG_MAJOR} && \
@@ -40,12 +47,16 @@ RUN DEBIAN_FRONTEND=noninteractive \
 RUN echo "\set HISTFILE /dev/null" > ${PSQLRC}
 
 
-VOLUME [ "/var/lib/postgresql" ]
-
-
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
 CMD [ "postgres" ]
 
 USER postgres
+
+
+
+FROM andahme/postgres:${INPUT_PG_MAJOR}-no-volume AS postgres
+
+
+VOLUME [ "/var/lib/postgresql" ]
 
