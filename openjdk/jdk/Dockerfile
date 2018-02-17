@@ -1,10 +1,13 @@
-FROM andahme/debian
+ARG INPUT_JAVA_MAJOR=9
 
 
-ENV JAVA_HOME /usr/lib/jvm/java-9-openjdk-amd64
+
+FROM andahme/openjdk:${INPUT_JAVA_MAJOR}-jre
+
+ARG INPUT_JAVA_MAJOR
 
 
 RUN DEBIAN_FRONTEND=noninteractive \
-    apt-get update \
-    && apt-get install --yes --no-install-recommends openjdk-9-jdk-headless
+    apt-get update && \
+    apt-get install --yes --no-install-recommends openjdk-${INPUT_JAVA_MAJOR}-jdk-headless
 
