@@ -23,7 +23,7 @@ RUN chmod 777 /opt/conf
 
 
 
-FROM andahme/openjdk:jre-8 AS image
+FROM andahme/openjdk:8-jre AS image
 
 ARG INPUT_ZOOKEEPER_VERSION
 
@@ -33,9 +33,9 @@ EXPOSE 2181
 
 ENV ZOOKEEPER_HOME /opt/zookeeper
 
-ENV PATH ${ZOOKEEPER_HOME}/bin:${PATH}
-
 ENV ZOOKEEPER_MYID 1
+
+ENV PATH ${ZOOKEEPER_HOME}/bin:${PATH}
 
 
 COPY --from=distribution /opt ${ZOOKEEPER_HOME}
@@ -56,7 +56,6 @@ VOLUME /var/lib/zookeeper
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
 CMD [ "zkServer.sh", "start-foreground" ]
-
 
 USER zookeeper
 
