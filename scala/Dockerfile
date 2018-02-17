@@ -17,7 +17,7 @@ RUN tar -zxf /tmp/scala-${SCALA_VERSION}.tar.gz -C /opt --strip-components=1
 
 
 
-FROM andahme/openjdk:jre-8 as image
+FROM andahme/openjdk:8-jre as scala
 
 ARG SCALA_VERSION
 
@@ -28,4 +28,16 @@ ENV PATH ${SCALA_HOME}/bin:${PATH}
 
 
 COPY --from=distribution /opt ${SCALA_HOME}
+
+RUN useradd --comment "Scala User" --create-home --uid 1011 scala
+
+RUN mkdir /workspace && \
+    chmod 777 /workspace
+
+
+WORKDIR /workspace
+
+CMD [ "scala" ]
+
+USER scala
 
