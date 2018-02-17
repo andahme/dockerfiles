@@ -1,15 +1,14 @@
-ARG ELASTIC_VERSION=6.1.2
+ARG ELASTIC_VERSION=6.2.1
 
 ARG ELASTIC_ARTIFACT=https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${ELASTIC_VERSION}.tar.gz
 
 
 
-FROM andahme/openjdk:jdk-8 AS distribution
+FROM andahme/debian AS distribution
 
 ARG ELASTIC_VERSION
 
 ARG ELASTIC_ARTIFACT
-
 
 
 ADD ${ELASTIC_ARTIFACT} /tmp/elastic-${ELASTIC_VERSION}.tar.gz
@@ -23,23 +22,22 @@ RUN mkdir -p /opt/logs && \
 
 
 
-
-FROM andahme/openjdk:jdk-8 AS image
+FROM andahme/openjdk:8-jre AS elastic
 
 EXPOSE 9200
 
 EXPOSE 9300
 
 
-ENV ELASTIC_HOME /opt/elastic
-
-ENV PATH ${ELASTIC_HOME}/bin:${PATH}
-
 ENV ELASTIC_CLUSTER_NAME Andahme
 
 ENV ELASTIC_NETWORK_HOST elastic
 
 ENV ELASTIC_NODE_NAME elastic
+
+ENV ELASTIC_HOME /opt/elastic
+
+ENV PATH ${ELASTIC_HOME}/bin:${PATH}
 
 
 COPY --from=distribution /opt ${ELASTIC_HOME}
@@ -58,7 +56,6 @@ VOLUME /data
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
 CMD [ "elasticsearch" ]
-
 
 USER elastic
 
