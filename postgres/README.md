@@ -1,47 +1,73 @@
-## Quick Start
+## Quick Start (Host Networking)
 
-### Server
+### Start Server
 **NOTE**: Creates initial user (`postgres`) with password (`2345`).  
 **NOTE**: Creates an initial user database (`postgres`).  
+```bash
+docker run -d --name postgres \
+  --network host \
+  andahme/postgres
+```
+
+### Run Client
+**NOTE**: The 'host' network is necessary when connecting to the `localhost` interface.  
+```bash
+docker run -it --rm \
+  --network host \
+  andahme/postgres psql -h localhost
+```
+
+
+## Quick Start (User Defined Network)
+
+### Create Network
+```bash
+docker network create ${NETWORK:=andahme}
+```
+
+### Start Server
 **NOTE**: Publishes the database on (`5432`) of the localhost interface (`127.0.0.1`).  
 ```bash
 docker run -d --name postgres \
-  --network ${NETWORK} --network-alias postgres \
+  --network ${NETWORK} \
   --publish 127.0.0.1:5432:5432 \
   andahme/postgres
 ```
 
-### Client
-**NOTE**: The default connection host (`postgres`) is defined in the `PGHOST` environment variable.  
+### Run Client
+**NOTE**: The default host connection (`PGHOST`) has been pre-defined (`postgres`).   
 ```bash
 docker run -it --rm \
   --network ${NETWORK} \
   andahme/postgres psql
 ```
 
+
 ## Explicit Initialization/Startup
 
-### Initialize Database Cluster
+### Initialize Database
 **NOTE**: Initializes a data volume (`pg-data`) with a new database cluster.  
 **NOTE**: Removes the application container (`-rm`) after initialization.  
 ```bash
 docker run -it --rm \
   --volume pg-data:/var/lib/postgresql \
-  andahme/postgres initdb
+  andahme/postgres init
 ```
 
 ### Start Server
-**NOTE**: Mount the data volume (`pg-data`) to an new application container at PGDATA (`/var/lib/postgresql`).  
-**NOTE**: Connects to a docker network (`${NETWORK}`) with a resolvable network alias (`postgres`).  
+**NOTE**: Mount the data volume (`pg-data`) to an application container.  
+**NOTE**: Connects to a user defined network (`${NETWORK}`) with alias (`postgres`).  
 ```bash
 docker run -d --name postgres \
-  --network ${NETWORK} --network-alias postgres \
+  --network ${NETWORK} \
   --volume pg-data:/var/lib/postgresql \
-  andahme/postgres noinitdb
+  andahme/postgres noinit
 ```
 
 
-## Single-User Mode
+## Other Tips
+
+### Run in Single-User Mode
 **NOTE**: Do not attempt to use on a running database.  
 ```bash
 docker run -it --rm \
@@ -49,19 +75,20 @@ docker run -it --rm \
   andahme/postgres postgres --single
 ```
 
+### Initialize a Database Cluster
 
+#### Auto-Configuration
+**NOTE**: `/docker-entrypoint.sh` commands (`initdb`, `initsql`, `init`, `postgres`, `noinit`) do not accept parameters or arguments.  
+**NOTE**: If (`INITDB_OPTIONS`) are provided, they are used without modification.  
+**NOTE**: If (`/docker-entrypoint.sh`) `initdb` is run interactively, it will prompt for a password (`--pwprompt`).  
+**NOTE**: If (`/docker-entrypoint.sh`) `initdb` is run in the background, a password file (`--pwfile /dev/shm/initdb_password`) will be used.  
 
-## Advanced Tips
+#### Authorization (initdb + psql)
+**NOTE**: If the (`PGDATABASE`) environment variable is not set, the default (`postgres`) will be used.  
+**NOTE**: If the (`PGUSER`) environment variable is not set, the default (`postgres`) will be used.  
 
-### Authorization
+#### Authorization (initdb)
+**NOTE**: To disable authentication entirely, set the (`INITDB_OPTIONS`) environment variable to (`--auth trust`).  
+**NOTE**: If the (`INITDB_PASSWORD`) environment variable is not set, the default (`2345`) will be used.  
+**NOTE**: To designate a password/secrets file, set the (`INITDB_PWFILE`) environment variable.  
 
-##### To initialize the database cluster with no authentication
-* Add the environment setting (`-e INITDB_AUTH_OPTIONS="--auth trust"`).  
-
-##### Pass additional arguments to `initdb`
-* Add `initdb` arguments without losing the defaults from (`INITDB_AUTH_OPTIONS`).  
-
-##### Supply a bootstrap password
-* Place a password file (or docker secret) at the path (`/run/secrets/pg_password`).  
-* If a password file is not present, an environment variable (`INITDB_BOOTSTRAP_PASSWORD`).  
-* If the environment variable (`INITDB_BOOTSTRAP_PASSWORD`) is not set, the default (`2345`) is used.  

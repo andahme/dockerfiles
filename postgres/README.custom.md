@@ -4,21 +4,37 @@
 ```bash
 docker run -it --name postgres \
   --network ${NETWORK} --network-alias postgres \
-  --volume ${PWD}/docker-init-sql:/docker-init-sql \
-  -e INITDB_BOOTSTRAP_PASSWORD="not2345" \
+  --volume ${PWD}/docker-init-sql:/sql \
+  -e INITDB_BOOTSTRAP_USERNAME=CUSTOM_USER \
   andahme/postgres:no-volume
 ```
 
-## Stop container and commit changes
+docker run -it --name postgres \
+  --network ${NETWORK} --network-alias postgres \
+  --volume ${PWD}/docker-init-sql:/docker-init-sql \
+  -e PGDATABASE=mydb \
+  -e PGUSER=myuser -e PGPASSWORD=mypass \
+  andahme/postgres:no-volume
+
+  
+## Stop container
+**NOTE**: It is also safe to use 'ctrl-c' to signal postgres for shutdown.
 ```bash
-docker stop postgers && \
-  docker commit postgres andahme/application-db:no-volume
+docker stop postgres
+```
+
+## Commit changes
+```bash
+docker commit \
+  postgres andahme/application-db:no-volume
 ```
 
 ## Cleanup
 ```bash
 docker rm postgres
 ```
+
+
 
 
 # Next Steps..
