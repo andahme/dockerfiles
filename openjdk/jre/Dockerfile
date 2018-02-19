@@ -2,7 +2,7 @@ ARG INPUT_JAVA_MAJOR=9
 
 
 
-FROM andahme/debian
+FROM andahme/debian:testing
 
 ARG INPUT_JAVA_MAJOR
 
