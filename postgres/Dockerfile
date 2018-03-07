@@ -16,6 +16,7 @@ ENV PGHOST postgres
 
 ENV PGDATA /var/lib/postgresql/${PG_MAJOR}/main
 
+
 ENV PATH /usr/lib/postgresql/${PG_MAJOR}/bin:${PATH}
 
 
@@ -49,7 +50,6 @@ USER postgres
 
 
 FROM andahme/postgres:${INPUT_PG_MAJOR}-no-volume AS postgres
-
 
 VOLUME [ "/var/lib/postgresql" ]
 
