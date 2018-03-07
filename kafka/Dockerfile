@@ -1,31 +1,29 @@
-ARG INPUT_KAFKA_VERSION=1.0.0
+ARG INPUT_JAVA_MAJOR=8
+
+ARG INPUT_KAFKA_VERSION=1.0.1
 
 ARG INPUT_SCALA_VERSION=2.11
 
-ARG INPUT_KAFKA_ARTIFACT=http://apache.osuosl.org/kafka/${INPUT_KAFKA_VERSION}/kafka_${INPUT_SCALA_VERSION}-${INPUT_KAFKA_VERSION}.tgz
+ARG KAFKA_ARTIFACT=http://apache.osuosl.org/kafka/${INPUT_KAFKA_VERSION}/kafka_${INPUT_SCALA_VERSION}-${INPUT_KAFKA_VERSION}.tgz
 
 
 
 FROM andahme/debian AS distribution
 
-ARG INPUT_KAFKA_ARTIFACT
-
-ARG INPUT_KAFKA_VERSION
+ARG KAFKA_ARTIFACT
 
 
-ADD ${INPUT_KAFKA_ARTIFACT} /tmp/kafka-${INPUT_KAFKA_VERSION}.tar.gz
+ADD ${KAFKA_ARTIFACT} /tmp/kafka.tar.gz
 
-RUN tar -zxf /tmp/kafka-${INPUT_KAFKA_VERSION}.tar.gz -C /opt --strip-component=1 \
+RUN tar -zxf /tmp/kafka.tar.gz -C /opt --strip-component=1 \
     --exclude=site-docs
-
-COPY log4j.properties /opt/config/log4j.properties
 
 RUN mkdir /opt/logs && \
     chmod 777 /opt/config /opt/logs
 
 
 
-FROM andahme/openjdk:8-jre AS kafka
+FROM andahme/openjdk:${INPUT_JAVA_MAJOR}-jre AS kafka
 
 ARG INPUT_KAFKA_VERSION
 
@@ -33,11 +31,7 @@ ARG INPUT_KAFKA_VERSION
 EXPOSE 9092
 
 
-ENV BROKER_ID 1
-
 ENV KAFKA_HOME /opt/kafka
-
-ENV ZOOKEEPER_CONNECT zookeeper:2181
 
 ENV PATH ${KAFKA_HOME}/bin:${PATH}
 
@@ -47,11 +41,14 @@ COPY --from=distribution /opt ${KAFKA_HOME}
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 
-RUN mkdir /var/lib/kafka && \
-    chmod 777 /var/lib/kafka && \
-    sed -i "s/^\\(log.dirs=\\).*/\1\/var\/lib\/kafka/g" ${KAFKA_HOME}/config/server.properties
-
 RUN useradd --comment "Kafka User" --create-home --uid 1011 kafka
+
+RUN sed -i "s/^\\(log.dirs=\\).*/\1\/var\/lib\/kafka/g" ${KAFKA_HOME}/config/server.properties
+
+COPY log4j.properties ${KAFKA_HOME}/config/log4j.properties
+
+RUN mkdir /var/lib/kafka && \
+    chmod 777 /var/lib/kafka
 
 
 VOLUME /var/lib/kafka

@@ -20,7 +20,8 @@ docker run -it --rm \
   --network ${NETWORK} \
   -e KAFKA_BROKER_LIST=kafka:9092 \
   -e KAFKA_SERVER=kafka:9092 \
-  andahme/kafka /bin/bash
+  -e ZOOKEEPER_CONNECT=zookeeper:2181 \
+  andahme/kafka bash
 ```
 
 
