@@ -8,7 +8,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
 RUN useradd --comment "Build User" --create-home --uid 1011 builder
 
 RUN mkdir /workspace && \
-    chown builder /workspace
+    chmod 777 /workspace
 
 
 WORKDIR /workspace
