@@ -6,7 +6,7 @@ ARG SCALA_ARTIFACT=https://downloads.lightbend.com/scala/${INPUT_SCALA_VERSION}/
 
 
 
-FROM andahme/debian AS distribution
+FROM andahme/debian:testing AS distribution
 
 ARG SCALA_ARTIFACT
 
