@@ -1,4 +1,6 @@
-ARG INPUT_SPARK_VERSION=2.2.1
+ARG INPUT_JAVA_MAJOR=8
+
+ARG INPUT_SPARK_VERSION=2.3.0
 
 ARG INPUT_SPARK_ARTIFACT=http://apache.spinellicreations.com/spark/spark-${INPUT_SPARK_VERSION}/spark-${INPUT_SPARK_VERSION}-bin-hadoop2.7.tgz
 
@@ -44,7 +46,7 @@ ADD ${INPUT_POSTGRES_JDBC_ARTIFACT} /opt/jars/postgresql-${INPUT_POSTGRES_JDBC_V
 
 
 
-FROM andahme/openjdk:8-jre AS spark
+FROM andahme/openjdk:${INPUT_JAVA_MAJOR}-jre AS spark
 
 ARG INPUT_SPARK_VERSION
 
