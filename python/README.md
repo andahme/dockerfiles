@@ -1,22 +1,15 @@
 ## Quick Start
-#### Python REPL
+
+### Python REPL
 ```bash
 docker run -it \
-  --user builder \
   andahme/python
 ```
 
-#### Shell w/Local Mount Workspace
+### Shell w/Local Mount Workspace
 ```bash
 docker run -it \
-  --user builder \
-  -v ${PWD}:/workspace \
+  --volume ${PWD}:/workspace \
   andahme/python bash
 ```
-
-## Feature(s)
-* Python
-* C/C++ compilation
-* Contains a `builder` user
-* Working directory `/workspace`
 
