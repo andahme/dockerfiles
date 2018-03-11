@@ -1,11 +1,4 @@
-# andahme/python
-## Feature(s)
-* Python
-* C/C++ compilation
-* Contains a `builder` user
-* Working directory `/workspace`
-
-## QuickStart
+## Quick Start
 #### Python REPL
 ```bash
 docker run -it \
@@ -20,3 +13,10 @@ docker run -it \
   -v ${PWD}:/workspace \
   andahme/python bash
 ```
+
+## Feature(s)
+* Python
+* C/C++ compilation
+* Contains a `builder` user
+* Working directory `/workspace`
+
