@@ -17,6 +17,8 @@ ENV PGHOST postgres
 ENV PGDATA /var/lib/postgresql/${PG_MAJOR}/main
 
 
+ENV LD_LIBRARY_PATH /usr/lib/postgresql/${PG_MAJOR}/lib
+
 ENV PATH /usr/lib/postgresql/${PG_MAJOR}/bin:${PATH}
 
 
