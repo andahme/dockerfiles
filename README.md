@@ -30,16 +30,20 @@ docker network create ${NETWORK:=andahme}
 docker run -it --name myapplication --network ${NETWORK} andahme/debian
 ```
 
-### Make Changes and Exit
+#### Make Changes
 ```bash
-apt-get update && apt-get install --yes --no-install-recommends nginx
+apt-get update && apt-get install --yes --no-install-recommends lighttpd
+echo "<html><head><title>Ohai</title></head><body><h2>andahme</h2></body></html>" > /usr/share/lighttpd/index.html
+```
+
+#### Exit Container
+```bash
 exit
 ```
 
-### Commit Changes & Cleanup
+### Commit Changes
 ```bash
 docker commit myapplication myrepo/myapplication:snapshot
-docker rm myapplication
 ```
 
 ### Run Custom Image
@@ -47,5 +51,5 @@ docker rm myapplication
 docker run -d --name myapplication \
   --network ${NETWORK} \
   --publish 127.0.0.1:8080:80 \
-  myrepo/myapplication:snapshot nginx -g daemon\ off\;
+  myrepo/myapplication:snapshot lighttpd -D -f /etc/lighttpd/lighttpd.conf
 ```
