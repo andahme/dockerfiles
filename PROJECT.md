@@ -15,11 +15,12 @@ Provide developer/development focused Docker image(s).
 * Sandbox (REPL/Shell)
 * Tool(s)
 
+
 ## Design
 
 ### Minimal Debian Docker image(s)
-**NOTE**: Base image `andahme/debian` is not modified in any way ([link](http://source.lab.andah.me:3000/andahme/docs/src/master/debian/README.md)).  
-**NOTE**: Can always start a shell by passing "bash".  
+**NOTE**: Base image `andahme/debian` is not modified in any way ([debian/README.md](https://github.com/andahme/dockerfiles/tree/master/debian/README.md)).  
+**NOTE**: Can always execute `bash` by command.  
 
 ### Customization(s)
 
