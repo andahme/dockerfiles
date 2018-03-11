@@ -37,12 +37,12 @@ RUN tar -zxf /tmp/spark-${INPUT_SPARK_VERSION}.tar.gz -C /opt --strip-component=
     --exclude=bin/*.cmd \
     --exclude=sbin
 
-RUN mkdir /opt/logs /opt/work && \
-    chmod -R 777 /opt/conf /opt/logs /opt/work
-
 ADD ${INPUT_MARIA_JDBC_ARTIFACT} /opt/jars/mariadb-java-client-${INPUT_MARIA_JDBC_VERSION}.jar
 
 ADD ${INPUT_POSTGRES_JDBC_ARTIFACT} /opt/jars/postgresql-${INPUT_POSTGRES_JDBC_VERSION}.jar
+
+RUN mkdir /opt/logs /opt/work && \
+    chmod -R 777 /opt/conf /opt/jars /opt/logs /opt/work
 
 
 
