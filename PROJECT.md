@@ -1,3 +1,20 @@
+## Project Goal(s)
+Provide developer/development focused Docker image(s).
+
+#### Application(s)
+* Database(s)
+* Messaging/Queue(s)
+* Webserver(s)
+
+#### Base/Build Image(s)
+* Compiler(s)
+* Runtime(s)
+
+#### Utility
+* Build-Process/Support
+* Sandbox (REPL/Shell)
+* Tool(s)
+
 ## Design
 
 ### Minimal Debian Docker image(s)
