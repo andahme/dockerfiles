@@ -6,7 +6,7 @@
 docker run -it --rm andahme/debian
 ```
 
-## Advanced
+## Common
 
 #### Create a (User Defined) Network
 ```bash
