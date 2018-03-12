@@ -1,4 +1,6 @@
-# Build 'no-volume' image
+## Build Image(s)
+
+#### Build 'no-volume' image
 ```bash
 docker build \
   --target postgres-no-volume \
@@ -7,12 +9,11 @@ docker build \
   postgres/.
 ```
 
-# Build 'standard' image
+#### Build 'standard' image
 ```bash
 docker build \
   --target postgres \
   --tag andahme/postgres:${INPUT_PG_MAJOR:=10} \
-  --build-arg INPUT_PG_MAJOR=${INPUT_PG_MAJOR} \
   postgres/.
 ```
 
