@@ -1,6 +1,6 @@
 ## Hadoop Base Image(s)
 
-#### Build
+#### Build Image
 ```bash
 docker build \
   --squash \
