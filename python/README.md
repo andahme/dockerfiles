@@ -6,7 +6,7 @@ docker run -it \
   andahme/python
 ```
 
-### Shell w/Local Mount Workspace
+### Bash Shell w/Mounted Workspace
 ```bash
 docker run -it \
   --volume ${PWD}:/workspace \
