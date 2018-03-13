@@ -21,7 +21,7 @@ docker run -it --rm \
     * [andahme/postgres](https://github.com/andahme/dockerfiles/blob/release/postgres/README.md)
     * ZooKeeper
 * Base Image(s)
-    * Build-Essential
+    * [andahme/build-essential](https://github.com/andahme/dockerfiles/blob/release/build-essential/build-essential/README.md)
     * Debian
     * Hadoop
     * Spark
