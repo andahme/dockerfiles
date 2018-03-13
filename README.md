@@ -16,7 +16,7 @@ docker run -it --rm \
 
 ## Contents
 * Application(s) & Client(s)
-    * Kafka
+    * [andahme/kafka](https://github.com/andahme/dockerfiles/blob/release/kafka/kafka/README.md)
     * NGINX
     * [andahme/postgres](https://github.com/andahme/dockerfiles/blob/release/postgres/README.md)
     * ZooKeeper
