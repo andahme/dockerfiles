@@ -19,7 +19,7 @@ Provide developer/development focused Docker image(s).
 ## Design
 
 ### Minimal Debian Docker image(s)
-**NOTE**: Base image `andahme/debian` is not modified in any way ([debian/README.md](https://github.com/andahme/dockerfiles/tree/master/debian/README.md)).  
+**NOTE**: Base image `andahme/debian` is not modified in any way ([debian/BUILD.md](https://github.com/andahme/dockerfiles/blob/release/debian/debian/BUILD.md)).  
 **NOTE**: Can always execute `bash` with command override.  
 
 ### Customization(s)
