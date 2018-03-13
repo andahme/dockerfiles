@@ -1,16 +1,16 @@
 ## Project Goal(s)
 Provide developer/development focused Docker image(s).
 
-#### Application(s)
+### Application(s)
+* Application Server(s)
 * Database(s)
-* Messaging/Queue(s)
-* Webserver(s)
+* Queue(s)
 
-#### Base/Build Image(s)
+### Base/Build Image(s)
 * Compiler(s)
 * Runtime(s)
 
-#### Utility
+### Utility
 * Build-Process/Support
 * Sandbox (REPL/Shell)
 * Tool(s)
