@@ -39,4 +39,4 @@ docker run -it --rm \
     * Node
     * OpenJDK
     * Python
-    * Scala
+    * [andahme/scala](https://github.com/andahme/dockerfiles/blob/release/scala/scala/README.md)
