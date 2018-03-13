@@ -22,7 +22,7 @@ docker run -it --rm \
     * ZooKeeper
 * Base Image(s)
     * [andahme/build-essential](https://github.com/andahme/dockerfiles/blob/release/build-essential/build-essential/README.md)
-    * Debian
+    * [andahme/debian](https://github.com/andahme/dockerfiles/blob/release/debian/debian/README.md)
     * Hadoop
     * Spark
 * Build Step(s) and Build Tool(s)
