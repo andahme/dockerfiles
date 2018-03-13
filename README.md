@@ -19,7 +19,7 @@ docker run -it --rm \
     * [andahme/kafka](https://github.com/andahme/dockerfiles/blob/release/kafka/kafka/README.md)
     * NGINX
     * [andahme/postgres](https://github.com/andahme/dockerfiles/blob/release/postgres/README.md)
-    * ZooKeeper
+    * [andahme/zooKeeper](https://github.com/andahme/dockerfiles/blob/release/zookeeper/zookeeper/README.md)
 * Base Image(s)
     * [andahme/build-essential](https://github.com/andahme/dockerfiles/blob/release/build-essential/build-essential/README.md)
     * [andahme/debian](https://github.com/andahme/dockerfiles/blob/release/debian/debian/README.md)
