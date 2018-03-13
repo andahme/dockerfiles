@@ -18,7 +18,7 @@ docker run -it --rm \
 * Application(s) & Client(s)
     * Kafka
     * NGINX
-    * Postgres
+    * [andahme/postgres](https://github.com/andahme/dockerfiles/blob/release/postgres/README.md)
     * ZooKeeper
 * Base Image(s)
     * Build-Essential
