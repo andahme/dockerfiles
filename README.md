@@ -1,22 +1,6 @@
 ## About
 [PROJECT.md](https://github.com/andahme/dockerfiles/blob/master/PROJECT.md)
 
-## Quick Start
-
-#### Create a (User Defined) Network
-```bash
-docker network create ${NETWORK:=andahme}
-```
-
-#### Start a (Debian) Container
-**NOTE**: The `--rm` flag causes the container to be removed when the process/tty exits.
-```bash
-docker run -it --rm \
-  --network ${NETWORK} \
-  andahme/debian
-```
-
-
 ## Contents
 * Application(s) & Client(s)
     * [andahme/kafka](https://github.com/andahme/dockerfiles/blob/release/kafka/kafka/README.md)
@@ -43,3 +27,18 @@ docker run -it --rm \
     * OpenJDK
     * Python
     * [andahme/scala](https://github.com/andahme/dockerfiles/blob/release/scala/scala/README.md)
+
+## Quick Start
+
+#### Create a (User Defined) Network
+```bash
+docker network create ${NETWORK:=andahme}
+```
+
+#### Start a (Debian) Container
+**NOTE**: The `--rm` flag causes the container to be removed when the process/tty exits.
+```bash
+docker run -it --rm \
+  --network ${NETWORK} \
+  andahme/debian
+```
