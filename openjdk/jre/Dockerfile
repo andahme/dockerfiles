@@ -7,6 +7,9 @@ FROM andahme/debian:testing
 ARG INPUT_JAVA_MAJOR
 
 
+ENV _JAVA_OPTIONS "-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
+
+
 ENV JAVA_HOME /usr/lib/jvm/java-${INPUT_JAVA_MAJOR}-openjdk-amd64
 
 
