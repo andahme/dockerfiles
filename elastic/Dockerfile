@@ -1,6 +1,6 @@
 ARG INPUT_JAVA_MAJOR=8
 
-ARG INPUT_ELASTIC_VERSION=6.2.2
+ARG INPUT_ELASTIC_VERSION=6.2.3
 
 ARG ELASTIC_ARTIFACT=https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-${INPUT_ELASTIC_VERSION}.tar.gz
 
