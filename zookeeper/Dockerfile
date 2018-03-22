@@ -6,7 +6,7 @@ ARG ZOOKEEPER_ARTIFACT=http://apache.mirrors.tds.net/zookeeper/zookeeper-${INPUT
 
 
 
-FROM andahme/debian AS distribution
+FROM andahme/debian:testing AS distribution
 
 ARG ZOOKEEPER_ARTIFACT
 
