@@ -1,4 +1,4 @@
-FROM andahme/debian
+FROM andahme/debian:testing
 
 EXPOSE 80
 
