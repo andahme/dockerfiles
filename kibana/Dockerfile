@@ -1,4 +1,4 @@
-ARG INPUT_KIBANA_VERSION=6.2.2
+ARG INPUT_KIBANA_VERSION=6.2.3
 
 ARG KIBANA_ARTIFACT=https://artifacts.elastic.co/downloads/kibana/kibana-${INPUT_KIBANA_VERSION}-linux-x86_64.tar.gz
 
