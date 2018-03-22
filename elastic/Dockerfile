@@ -6,7 +6,7 @@ ARG ELASTIC_ARTIFACT=https://artifacts.elastic.co/downloads/elasticsearch/elasti
 
 
 
-FROM andahme/debian AS distribution
+FROM andahme/debian:testing AS distribution
 
 ARG ELASTIC_ARTIFACT
 
