@@ -1,4 +1,8 @@
-FROM andahme/debian:testing
+ARG INPUT_DEBIAN_RELEASE=testing
+
+
+
+FROM andahme/debian:${INPUT_DEBIAN_RELEASE} AS build-essential
 
 
 RUN DEBIAN_FRONTEND=noninteractive \
