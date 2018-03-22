@@ -6,7 +6,7 @@ ARG HADOOP_ARTIFACT=http://apache.spinellicreations.com/hadoop/common/hadoop-${I
 
 
 
-FROM andahme/debian AS distribution
+FROM andahme/debian:testing AS distribution
 
 ARG HADOOP_ARTIFACT
 
