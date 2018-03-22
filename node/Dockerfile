@@ -4,7 +4,7 @@ ARG NODE_ARTIFACT=https://nodejs.org/dist/v${INPUT_NODE_VERSION}/node-v${INPUT_N
 
 
 
-FROM andahme/debian AS distribution
+FROM andahme/debian:testing AS distribution
 
 ARG NODE_ARTIFACT
 
@@ -35,7 +35,7 @@ USER builder
 
 
 
-FROM andahme/node:no-volume AS node
+FROM andahme/node:${INPUT_NODE_VERSION}-no-volume AS node
 
 VOLUME ${NODE_HOME}/lib/node_modules
 

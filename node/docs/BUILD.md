@@ -4,7 +4,7 @@
 ```bash
 docker build \
   --target no-volume \
-  --tag andahme/node:no-volume \
+  --tag andahme/node:9.9.0-no-volume \
   --squash \
   node/.
 ```
@@ -13,7 +13,7 @@ docker build \
 ```bash
 docker build \
   --target node \
-  --tag andahme/node \
+  --tag andahme/node:9.9.0 \
   node/.
 ```
 
