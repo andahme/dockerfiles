@@ -33,7 +33,7 @@ case ${COMMAND} in
         shopt -s nullglob
         for DOCKER_INIT_SQL in /sql/*.sql; do
             echo "ANDAHME Applying SQL (${DOCKER_INIT_SQL})"
-            postgres --single ${PGDATABASE:-postgres} -F -c exit_on_error=true >> ${PGDATA}/sql.log < ${DOCKER_INIT_SQL}
+            postgres --single ${PGDATABASE:-postgres} -c exit_on_error=true -j >> ${PGDATA}/sql.log < ${DOCKER_INIT_SQL}
         done
         shopt -u nullglob
         ;;&
