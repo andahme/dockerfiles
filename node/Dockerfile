@@ -1,4 +1,4 @@
-ARG INPUT_NODE_VERSION=9.9.0
+ARG INPUT_NODE_VERSION=10.0.0
 
 ARG NODE_ARTIFACT=https://nodejs.org/dist/v${INPUT_NODE_VERSION}/node-v${INPUT_NODE_VERSION}-linux-x64.tar.gz
 
@@ -25,13 +25,15 @@ ENV NODE_HOME /opt/node-${INPUT_NODE_VERSION}
 ENV PATH ${NODE_HOME}/bin:${PATH}
 
 
-COPY --from=distribution --chown=root:builder /opt ${NODE_HOME}
+COPY --from=distribution /opt ${NODE_HOME}
 
 
 RUN ln -s ${NODE_HOME}/bin/node ${NODE_HOME}/bin/nodejs
 
+RUN useradd --comment "Node User" --create-home --uid 1011 node
 
-USER builder
+
+USER node
 
 
 
