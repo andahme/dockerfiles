@@ -1,6 +1,6 @@
 ARG INPUT_JAVA_MAJOR=8
 
-ARG INPUT_HADOOP_VERSION=3.0.0
+ARG INPUT_HADOOP_VERSION=3.0.2
 
 ARG HADOOP_ARTIFACT=http://apache.spinellicreations.com/hadoop/common/hadoop-${INPUT_HADOOP_VERSION}/hadoop-${INPUT_HADOOP_VERSION}.tar.gz
 
