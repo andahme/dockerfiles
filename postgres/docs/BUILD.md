@@ -4,7 +4,7 @@
 ```bash
 docker build \
   --target postgres-no-volume \
-  --tag andahme/postgres:${INPUT_PG_MAJOR:=10}-no-volume \
+  --tag andahme/postgres:${INPUT_PG_MAJOR:=11}-no-volume \
   --squash \
   postgres/.
 ```
@@ -13,7 +13,7 @@ docker build \
 ```bash
 docker build \
   --target postgres \
-  --tag andahme/postgres:${INPUT_PG_MAJOR:=10} \
+  --tag andahme/postgres:${INPUT_PG_MAJOR:=11} \
   postgres/.
 ```
 
