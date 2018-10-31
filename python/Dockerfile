@@ -2,7 +2,7 @@ ARG INPUT_DOCKER_REGISTRY=andahme
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/build-essential:testing
+FROM ${INPUT_DOCKER_REGISTRY}/build-essential:testing as python
 
 
 RUN DEBIAN_FRONTEND=noninteractive \
