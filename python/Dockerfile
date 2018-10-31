@@ -1,4 +1,8 @@
-FROM andahme/build-essential:testing
+ARG INPUT_DOCKER_REGISTRY=andahme
+
+
+
+FROM ${INPUT_DOCKER_REGISTRY}/build-essential:testing
 
 
 RUN DEBIAN_FRONTEND=noninteractive \
