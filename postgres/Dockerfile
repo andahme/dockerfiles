@@ -1,8 +1,10 @@
+ARG INPUT_DOCKER_REGISTRY=andahme
+
 ARG INPUT_PG_MAJOR=10
 
 
 
-FROM andahme/debian:testing AS postgres-no-volume
+FROM ${INPUT_DOCKER_REGISTRY}/debian:testing AS postgres-no-volume
 
 ARG INPUT_PG_MAJOR
 
@@ -51,7 +53,7 @@ USER postgres
 
 
 
-FROM andahme/postgres:${INPUT_PG_MAJOR}-no-volume AS postgres
+FROM ${INPUT_DOCKER_REGISTRY}/postgres:${INPUT_PG_MAJOR}-no-volume AS postgres
 
 VOLUME [ "/var/lib/postgresql" ]
 
