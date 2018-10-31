@@ -1,13 +1,12 @@
-ARG INPUT_JAVA_MAJOR=10
+ARG INPUT_DOCKER_REGISTRY=andahme
+
+ARG INPUT_JAVA_MAJOR=11
 
 
 
-FROM andahme/debian:testing
+FROM ${INPUT_DOCKER_REGISTRY}/debian:testing
 
 ARG INPUT_JAVA_MAJOR
-
-
-ENV _JAVA_OPTIONS "-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap"
 
 
 ENV JAVA_HOME /usr/lib/jvm/java-${INPUT_JAVA_MAJOR}-openjdk-amd64
