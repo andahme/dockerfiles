@@ -1,8 +1,10 @@
 ARG INPUT_DEBIAN_RELEASE=testing
 
+ARG INPUT_DOCKER_REGISTRY=andahme
 
 
-FROM andahme/debian:${INPUT_DEBIAN_RELEASE} AS build-essential
+
+FROM ${INPUT_DOCKER_REGISTRY}/debian:${INPUT_DEBIAN_RELEASE} AS build-essential
 
 
 RUN DEBIAN_FRONTEND=noninteractive \
