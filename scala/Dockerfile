@@ -1,3 +1,5 @@
+ARG INPUT_DOCKER_REGISTRY=andahme
+
 ARG INPUT_JAVA_MAJOR=8
 
 ARG INPUT_SCALA_VERSION=2.12.5
@@ -6,7 +8,7 @@ ARG SCALA_ARTIFACT=https://downloads.lightbend.com/scala/${INPUT_SCALA_VERSION}/
 
 
 
-FROM andahme/debian:testing AS distribution
+FROM ${INPUT_DOCKER_REGISTRY}/debian:testing AS distribution
 
 ARG SCALA_ARTIFACT
 
@@ -17,7 +19,7 @@ RUN tar -zxf /tmp/scala.tar.gz -C /opt --strip-components=1
 
 
 
-FROM andahme/openjdk:${INPUT_JAVA_MAJOR}-jre as scala
+FROM ${INPUT_DOCKER_REGISTRY}/openjdk-jre:${INPUT_JAVA_MAJOR} AS scala
 
 ARG INPUT_SCALA_VERSION
 
