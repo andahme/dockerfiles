@@ -3,7 +3,7 @@
 #### Build 'no-volume' image
 ```bash
 docker build \
-  --target postgres-no-volume \
+  --target no-volume \
   --tag andahme/postgres:${INPUT_PG_MAJOR:=11}-no-volume \
   --squash \
   postgres/.

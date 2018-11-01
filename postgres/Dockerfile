@@ -4,7 +4,7 @@ ARG INPUT_PG_MAJOR=11
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/debian:testing AS postgres-no-volume
+FROM ${INPUT_DOCKER_REGISTRY}/debian:testing AS no-volume
 
 ARG INPUT_PG_MAJOR
 
