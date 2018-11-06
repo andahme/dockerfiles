@@ -1,5 +1,7 @@
 ARG INPUT_DOCKER_REGISTRY=andahme
 
+ARG INPUT_DOCKER_TAG=11
+
 ARG INPUT_PG_MAJOR=11
 
 
@@ -53,7 +55,7 @@ USER postgres
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/postgres:${INPUT_PG_MAJOR}-no-volume AS postgres
+FROM ${INPUT_DOCKER_REGISTRY}/postgres:${INPUT_DOCKER_TAG}-no-volume AS postgres
 
 VOLUME [ "/var/lib/postgresql" ]
 
