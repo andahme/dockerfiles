@@ -3,49 +3,58 @@
 #### Install Docker CE
 
 
-#### Prepare Debootstrap
+#### Prepare for Debootstrap
 ```bash
 apt-get update && apt-get --yes install debootstrap xz-utils
 ```
 
-#### Create Base Image(s)
+#### Make Debian Image(s)
 ```bash
-export DEBIAN_MIRROR="http://apt-cacher.lab.andah.me:3142/debian"
 export DOCKER_REGISTRY="registry.lab.andah.me"
-```
 
+export DEBIAN_MIRROR="http://apt-cacher.lab.andah.me:3142/debian"
+```
+```
+function mkDebian {
+  ./mkimage.sh -t ${DOCKER_REGISTRY}/debian:$1 debootstrap --variant=minbase $1 ${DEBIAN_MIRROR}
+}
+```
 ```bash
-pushd /usr/share/docker-ce/contrib
-    ./mkimage.sh -t ${DOCKER_REGISTRY:-andahme}/debian:testing debootstrap --variant=minbase testing ${DEBIAN_MIRROR}
-    ./mkimage.sh -t ${DOCKER_REGISTRY:-andahme}/debian:stretch debootstrap --variant=minbase stretch ${DEBIAN_MIRROR}
-    ./mkimage.sh -t ${DOCKER_REGISTRY:-andahme}/debian:jessie debootstrap --variant=minbase jessie ${DEBIAN_MIRROR}
-popd
+cd /usr/share/docker-ce/contrib
 
-
-docker push ${DOCKER_REGISTRY:-andahme}/debian:testing
-docker push ${DOCKER_REGISTRY:-andahme}/debian:stretch
-docker push ${DOCKER_REGISTRY:-andahme}/debian:jessie
+mkDebian testing
+mkDebian stretch
+mkDebian jessie
 ```
 
-## Re-Tagging
-
-#### Testing
+#### Push Debian Images
 ```bash
-docker tag andahme/debian:testing andahme/debian:latest
-docker push andahme/debian:latest
+function dPush {
+  docker push ${DOCKER_REGISTRY}/debian:$1
+}
+```
+```
+dPush testing
+dPush stretch
+dPush jessie
 ```
 
-#### Stretch
+#### Tag and Push
 ```bash
-docker tag andahme/debian:stretch andahme/debian:stable
-docker push andahme/debian:stable
+function tPush {
+  docker tag ${DOCKER_REGISTRY}/debian:$1 ${DOCKER_REGISTRY}/debian:$2
+  docker push ${DOCKER_REGISTRY}/debian:$2
+}
+```
+```
+# testing/latest
+tPush testing latest
 
-docker tag andahme/debian:stretch andahme/debian:9
-docker push andahme/debian:9
+# stretch/9
+tPush stretch stable
+tPush stretch 9
+
+# jessie/8
+tPush jessie 8
 ```
 
-#### Jessie
-```bash
-docker tag andahme/debian:jessie andahme/debian:8
-docker push andahme/debian:8
-```
