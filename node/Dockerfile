@@ -22,7 +22,7 @@ RUN tar -zxf /tmp/node.tar.gz -C /opt --strip-components=1
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/build-essential:testing AS no-volume
+FROM ${INPUT_DOCKER_REGISTRY}/build-essential:testing AS node
 
 ARG INPUT_NODE_VERSION
 
@@ -39,14 +39,14 @@ RUN ln -s ${NODE_HOME}/bin/node ${NODE_HOME}/bin/nodejs
 
 RUN useradd --comment "Node User" --create-home --uid 1011 node
 
+RUN mkdir -p ${NODE_HOME}/lib/node_modules && \
+    chown -R node:node ${NODE_HOME}/bin ${NODE_HOME}/lib
 
-USER node
-
-
-
-FROM ${INPUT_DOCKER_REGISTRY}/node:${INPUT_DOCKER_TAG}-no-volume AS node
 
 VOLUME ${NODE_HOME}/lib/node_modules
 
 VOLUME /workspace
+
+
+USER node
 
