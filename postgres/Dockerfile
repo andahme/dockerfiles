@@ -6,7 +6,7 @@ ARG INPUT_PG_MAJOR=11
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/debian:testing AS no-volume
+FROM ${INPUT_DOCKER_REGISTRY}/debian:testing AS postgres
 
 ARG INPUT_PG_MAJOR
 
@@ -45,6 +45,9 @@ RUN DEBIAN_FRONTEND=noninteractive \
     sed -i -r -e "s/^#?(listen_addresses = ).*/\1'0.0.0.0'/g" -e "s/^#?(unix_socket_directories = )'.*'/\1''/g" /usr/share/postgresql/${PG_MAJOR}/postgresql.conf.sample
 
 
+VOLUME [ "/var/lib/postgresql" ]
+
+
 WORKDIR /var/lib/postgresql
 
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
@@ -52,10 +55,4 @@ ENTRYPOINT [ "/docker-entrypoint.sh" ]
 CMD [ "postgres" ]
 
 USER postgres
-
-
-
-FROM ${INPUT_DOCKER_REGISTRY}/postgres:${INPUT_DOCKER_TAG}-no-volume AS postgres
-
-VOLUME [ "/var/lib/postgresql" ]
 

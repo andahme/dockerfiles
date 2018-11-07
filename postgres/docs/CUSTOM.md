@@ -1,4 +1,5 @@
 # Create a custom Postgres image
+NOTE: Build custom tag (no-volume) by removing VOLUME line from postgres/Dockerfile
 
 ## Start an 'andahme/postgres:no-volume' container
 ```bash
