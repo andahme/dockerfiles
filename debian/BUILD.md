@@ -1,60 +1,28 @@
 ## Build Image(s)
 
-#### Install Docker CE
-
-
-#### Prepare for Debootstrap
+#### Install Docker CE and debootstrap tools
 ```bash
-apt-get update && apt-get --yes install debootstrap xz-utils
+apt-get update && \
+  apt-get --yes install docker-ce && \
+  apt-get --yes install debootstrap xz-utils
 ```
 
 #### Make Debian Image(s)
+NOTE: As root
 ```bash
 export DOCKER_REGISTRY="registry.lab.andah.me"
 
 export DEBIAN_MIRROR="http://apt-cacher.lab.andah.me:3142/debian"
 ```
-```
-function mkDebian {
-  ./mkimage.sh -t ${DOCKER_REGISTRY}/debian:$1 debootstrap --variant=minbase $1 ${DEBIAN_MIRROR}
-}
-```
 ```bash
 cd /usr/share/docker-ce/contrib
 
-mkDebian testing
-mkDebian stretch
-mkDebian jessie
-```
+./mkimage.sh -t ${DOCKER_REGISTRY}/debian:testing debootstrap --variant=minbase testing ${DEBIAN_MIRROR}
+./mkimage.sh -t ${DOCKER_REGISTRY}/debian:stretch debootstrap --variant=minbase stretch ${DEBIAN_MIRROR}
+./mkimage.sh -t ${DOCKER_REGISTRY}/debian:jessie debootstrap --variant=minbase jessie ${DEBIAN_MIRROR}
 
-#### Push Debian Images
-```bash
-function dPush {
-  docker push ${DOCKER_REGISTRY}/debian:$1
-}
-```
-```
-dPush testing
-dPush stretch
-dPush jessie
-```
-
-#### Tag and Push
-```bash
-function tPush {
-  docker tag ${DOCKER_REGISTRY}/debian:$1 ${DOCKER_REGISTRY}/debian:$2
-  docker push ${DOCKER_REGISTRY}/debian:$2
-}
-```
-```
-# testing/latest
-tPush testing latest
-
-# stretch/9
-tPush stretch stable
-tPush stretch 9
-
-# jessie/8
-tPush jessie 8
+docker push ${DOCKER_REGISTRY}/debian:testing
+docker push ${DOCKER_REGISTRY}/debian:stretch
+docker push ${DOCKER_REGISTRY}/debian:jessie
 ```
 
