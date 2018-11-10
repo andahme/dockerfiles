@@ -27,7 +27,7 @@ RUN apt-get update && \
     apt-get install --yes ca-certificates apache2-utils
 
 
-VOLUME ["/var/lib/registry"]
+VOLUME [ "/var/lib/registry" ]
 
 
 CMD [ "registry", "serve", "/etc/docker/registry/config.yml" ]
