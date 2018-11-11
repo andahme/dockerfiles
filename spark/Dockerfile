@@ -1,3 +1,5 @@
+ARG INPUT_DOCKER_REGISTRY=andahme
+
 ARG INPUT_JAVA_MAJOR=8
 
 ARG INPUT_SPARK_VERSION=2.3.1
@@ -6,7 +8,7 @@ ARG SPARK_ARTIFACT=http://apache.spinellicreations.com/spark/spark-${INPUT_SPARK
 
 
 
-FROM andahme/debian:testing AS distribution
+FROM ${INPUT_DOCKER_REGISTRY}/debian:testing AS distribution
 
 ARG SPARK_ARTIFACT
 
@@ -26,7 +28,7 @@ RUN mkdir /opt/logs /opt/work && \
 
 
 
-FROM andahme/openjdk:${INPUT_JAVA_MAJOR}-jre AS spark
+FROM ${INPUT_DOCKER_REGISTRY}/openjdk-jre:${INPUT_JAVA_MAJOR} AS spark
 
 ARG INPUT_SPARK_VERSION
 
