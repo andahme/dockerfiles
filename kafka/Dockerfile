@@ -26,7 +26,7 @@ RUN mkdir /opt/logs && \
 
 
 
-FROM andahme/openjdk:${INPUT_JAVA_MAJOR}-jre AS kafka
+FROM ${INPUT_DOCKER_REGISTRY}/openjdk-jre:${INPUT_JAVA_MAJOR} AS kafka
 
 ARG INPUT_KAFKA_VERSION
 
