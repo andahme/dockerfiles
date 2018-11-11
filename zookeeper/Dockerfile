@@ -1,3 +1,5 @@
+ARG INPUT_DOCKER_REGISTRY=andahme
+
 ARG INPUT_JAVA_MAJOR=8
 
 ARG INPUT_ZOOKEEPER_VERSION=3.4.11
@@ -6,7 +8,7 @@ ARG ZOOKEEPER_ARTIFACT=http://apache.mirrors.tds.net/zookeeper/zookeeper-${INPUT
 
 
 
-FROM andahme/debian:testing AS distribution
+FROM ${INPUT_DOCKER_REGISTRY}/debian:testing AS distribution
 
 ARG ZOOKEEPER_ARTIFACT
 
@@ -23,7 +25,7 @@ RUN chmod 777 /opt/conf
 
 
 
-FROM andahme/openjdk:${INPUT_JAVA_MAJOR}-jre AS image
+FROM ${INPUT_DOCKER_REGISTRY}/openjdk-jre:${INPUT_JAVA_MAJOR} AS zookeeper
 
 ARG INPUT_ZOOKEEPER_VERSION
 
