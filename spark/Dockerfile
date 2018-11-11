@@ -2,7 +2,8 @@ ARG INPUT_DOCKER_REGISTRY=andahme
 
 ARG INPUT_JAVA_MAJOR=8
 
-ARG INPUT_SPARK_VERSION=2.3.1
+ARG INPUT_SPARK_VERSION=2.4.0
+
 
 ARG SPARK_ARTIFACT=http://apache.spinellicreations.com/spark/spark-${INPUT_SPARK_VERSION}/spark-${INPUT_SPARK_VERSION}-bin-hadoop2.7.tgz
 
