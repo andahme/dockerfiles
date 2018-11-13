@@ -1,10 +1,13 @@
-FROM andahme/debian:testing
+ARG INPUT_DOCKER_REGISTRY=andahme
+
+
+
+FROM ${INPUT_DOCKER_REGISTRY}/debian:testing
 
 EXPOSE 80
 
 
-RUN DEBIAN_FRONTEND=noninteractive \
-    apt-get update && \
+RUN apt-get update && \
     apt-get install --yes --no-install-recommends nginx
 
 RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
