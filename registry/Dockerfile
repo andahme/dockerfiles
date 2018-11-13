@@ -1,4 +1,4 @@
-ARG INPUT_DOCKER_REGISTRY=registry.lab.andah.me
+ARG INPUT_DOCKER_REGISTRY=andahme
 
 
 FROM ${INPUT_DOCKER_REGISTRY}/golang:testing AS distribution
