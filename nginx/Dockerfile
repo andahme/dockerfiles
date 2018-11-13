@@ -2,7 +2,7 @@ ARG INPUT_DOCKER_REGISTRY=andahme
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/debian:testing
+FROM ${INPUT_DOCKER_REGISTRY}/debian:testing AS nginx
 
 EXPOSE 8080
 
