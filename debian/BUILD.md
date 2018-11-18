@@ -9,17 +9,16 @@ apt-get update && \
 
 #### Make Debian Image(s)
 NOTE: As root
-```bash
-export DOCKER_REGISTRY="registry.lab.andah.me"
 
-export DEBIAN_MIRROR="http://apt-cacher.lab.andah.me:3142/debian"
+```bash
+export DOCKER_REGISTRY="andahme"
 ```
 ```bash
 cd /usr/share/docker-ce/contrib
 
-./mkimage.sh -t ${DOCKER_REGISTRY}/debian:testing debootstrap --variant=minbase testing ${DEBIAN_MIRROR}
-./mkimage.sh -t ${DOCKER_REGISTRY}/debian:stretch debootstrap --variant=minbase stretch ${DEBIAN_MIRROR}
-./mkimage.sh -t ${DOCKER_REGISTRY}/debian:jessie debootstrap --variant=minbase jessie ${DEBIAN_MIRROR}
+./mkimage.sh -t ${DOCKER_REGISTRY}/debian:testing debootstrap --variant=minbase testing
+./mkimage.sh -t ${DOCKER_REGISTRY}/debian:stretch debootstrap --variant=minbase stretch
+./mkimage.sh -t ${DOCKER_REGISTRY}/debian:jessie debootstrap --variant=minbase jessie
 
 docker push ${DOCKER_REGISTRY}/debian:testing
 docker push ${DOCKER_REGISTRY}/debian:stretch
