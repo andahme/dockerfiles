@@ -1,8 +1,8 @@
-ARG INPUT_DEBIAN_RELEASE=testing
+ARG INPUT_DOCKER_REGISTRY=andahme
 
 
 
-FROM andahme/debian:${INPUT_DEBIAN_RELEASE} AS apt-cacher-ng
+FROM ${INPUT_DOCKER_REGISTRY}/debian:testing AS apt-cacher-ng
 
 EXPOSE 3142
 
