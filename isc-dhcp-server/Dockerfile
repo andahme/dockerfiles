@@ -10,7 +10,8 @@ EXPOSE 67
 RUN apt-get update && \
     apt-get install --yes --no-install-recommends isc-dhcp-server
 
-RUN useradd --comment "DHCPd Process User" --system --uid 511 dhcpd
+RUN useradd --comment "DHCPd Process User" --system --uid 511 dhcpd && \
+    touch /var/lib/dhcp/dhcpd.leases
 
 
 VOLUME [ "/var/lib/dhcp" ]
