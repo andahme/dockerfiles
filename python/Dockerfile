@@ -2,7 +2,7 @@ ARG INPUT_DOCKER_REGISTRY=andahme
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/build-essential:testing AS python
+FROM ${INPUT_DOCKER_REGISTRY}/build-essential:testing AS base
 
 
 RUN DEBIAN_FRONTEND=noninteractive \
@@ -11,6 +11,11 @@ RUN DEBIAN_FRONTEND=noninteractive \
 
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 0 && \
     update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 0
+
+
+
+FROM base AS python
+
 
 RUN useradd --comment "Python User" --create-home --uid 1011 python
 
