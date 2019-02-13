@@ -35,11 +35,12 @@ Provide developer/development focused Docker image(s).
 
 #### Andahme Best Practice(s)
 * Don't run as **root**
-  * Attempt to provide proper function as (as well as **root**)
+  * Attempt to provide proper function as user (as well as **root**)
   * By default, prefer a system account (511)
     * If a user home directory is needed for proper function, create a user account (1011)
-    * Do **NOT** override the default **USER** in base image(s), provide for runtime override
+    * Do **NOT** override the default **USER** in base images, provide for runtime override
 * If you write to disk, make a **data volume**
+  * This does not need to apply to ephemeral configuration files (generated from environment variables)
 * Log to **console**
   * Sometimes this means overriding log4j.properties or similar
 
