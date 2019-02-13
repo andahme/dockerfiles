@@ -1,17 +1,22 @@
-FROM andahme/python AS jupyter
+FROM andahme/python:base AS jupyter
 
 EXPOSE 8888
 
 
-ENV PATH /home/python/.local/bin:${PATH}
-
-
-RUN pip install --no-cache-dir jupyterlab
+RUN pip install --no-cache-dir --system jupyterlab
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 
-VOLUME /home/python/.local
+RUN useradd --comment "Jupyter User" --create-home --uid 1011 jupyter && \
+    mkdir /home/jupyter/.local && \
+    chown jupyter:jupyter /home/jupyter/.local
+
+
+VOLUME /home/jupyter/.local
+
+
+USER jupyter
 
 
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
