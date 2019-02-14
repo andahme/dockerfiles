@@ -3,17 +3,18 @@ Provide developer/development focused Docker images.
 
 ### Applications
 * Application Servers
+* Clients
 * Databases
 * Queues
 
-### Base/Build Images
-* Compilers
-* Runtimes
+### Base Images
+* Frameworks (Hadoop, Spark)
+* Runtimes (Java, Node, Python)
 
-### Utility
-* Build-Process/Support
+### Developer Images
+* Build (Go, Gradle, Maven, SBT)
 * Sandbox (REPL/Shell)
-* Tools
+* Testing/Integration
 
 
 ## Design Goals
