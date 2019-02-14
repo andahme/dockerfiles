@@ -20,7 +20,7 @@ RUN tar -zxf /tmp/node.tar.gz -C /opt --strip-components=1
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/build-essential:testing AS node
+FROM ${INPUT_DOCKER_REGISTRY}/build-essential:testing AS base
 
 ARG INPUT_NODE_VERSION
 
@@ -34,6 +34,11 @@ COPY --from=distribution /opt ${NODE_HOME}
 
 
 RUN ln -s ${NODE_HOME}/bin/node ${NODE_HOME}/bin/nodejs
+
+
+
+FROM base AS node
+
 
 RUN useradd --comment "Node User" --create-home --uid 1011 node
 
