@@ -37,9 +37,11 @@ RUN ln -s ${NODE_HOME}/bin/node ${NODE_HOME}/bin/nodejs
 
 RUN useradd --comment "Node User" --create-home --uid 1011 node
 
-RUN mkdir -p ${NODE_HOME}/lib/node_modules && \
-    chown -R node:node ${NODE_HOME}/bin ${NODE_HOME}/lib
+RUN mkdir -p /home/node/.npm && \
+    chown -R node:node /home/node/.npm ${NODE_HOME}/bin ${NODE_HOME}/lib/node_modules
 
+
+VOLUME /home/node/.npm
 
 VOLUME ${NODE_HOME}/lib/node_modules
 
