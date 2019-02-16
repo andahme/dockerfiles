@@ -2,7 +2,10 @@ ARG INPUT_DOCKER_REGISTRY=andahme
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/build-essential:testing AS base
+FROM ${INPUT_DOCKER_REGISTRY}/build-essential:testing AS python
+
+
+ENV PATH /home/python/.local/bin:${PATH}
 
 
 RUN DEBIAN_FRONTEND=noninteractive \
@@ -12,15 +15,13 @@ RUN DEBIAN_FRONTEND=noninteractive \
 RUN update-alternatives --install /usr/bin/python python /usr/bin/python3 0 && \
     update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 0
 
+RUN useradd --comment "Python User" --create-home --uid 1011 python && \
+    mkdir -p /home/python/.cache /home/python/.local && \
+    chown -R python:python /home/python/.local
 
 
-FROM base AS python
-
-
-RUN useradd --comment "Python User" --create-home --uid 1011 python
+VOLUME /home/python/.local
 
 
 USER python
-
-CMD python
 
