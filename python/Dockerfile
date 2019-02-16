@@ -22,6 +22,10 @@ RUN useradd --comment "Python User" --create-home --uid 1011 python && \
 
 VOLUME /home/python/.local
 
+VOLUME /workspace
+
+
+CMD [ "python" ]
 
 USER python
 
