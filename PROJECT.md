@@ -2,7 +2,6 @@
 * Strive to keep images simple/basic
 
 ### Design Choices
-* Can always execute `bash` with command override. 
 
 ##### Applications
 * Bootstrap Macro(s)
@@ -23,5 +22,8 @@
 
 ##### Base Images
 * Root `andahme/debian` is not modified in any way (see [debian/BUILD.md](https://github.com/andahme/dockerfiles/blob/release/debian/debian/BUILD.md)).  
-* Do not specify runtime user
-* Do not create volumes
+* Do not specify runtime user.
+* Do not create volumes.
+
+##### Other
+* Can always execute `bash` with command override.
