@@ -1,29 +1,10 @@
-## Project Goals
-Provide developer/development focused Docker images.
-
-### Applications
-* Application Servers
-* Clients
-* Databases
-* Queues
-
-### Base Images
-* Frameworks (Hadoop, Spark)
-* Runtimes (Java, Node, Python)
-
-### Developer Images
-* Build (Go, Gradle, Maven, SBT)
-* Sandbox (REPL/Shell)
-* Testing/Integration
-
-
-## Design Goals
+### Design Goals
 * Strive to keep images simple/basic
 
-## Design Choices
+### Design Choices
 * Can always execute `bash` with command override. 
 
-### Applications
+##### Applications
 * Bootstrap Macro(s)
   * Configuration via **Environment** variables
   * Self-Assembly of **dependent** services via **Default** values
@@ -41,8 +22,7 @@ Provide developer/development focused Docker images.
 * Log to **console**
   * Sometimes this means overriding log4j.properties or similar
 
-### Base Images
-* Root `andahme/debian` is not modified in any way ([debian/BUILD.md](https://github.com/andahme/dockerfiles/blob/release/debian/debian/BUILD.md)).  
-* Do not create users
+##### Base Images
+* Root `andahme/debian` is not modified in any way (see [debian/BUILD.md](https://github.com/andahme/dockerfiles/blob/release/debian/debian/BUILD.md)).  
 * Do not specify runtime user
-* Do not use any volumes
+* Do not create volumes
