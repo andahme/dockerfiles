@@ -2,7 +2,8 @@ ARG INPUT_DOCKER_REGISTRY=andahme
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/build-essential:testing AS golang
+FROM ${INPUT_DOCKER_REGISTRY}/build-essential:base AS build
+
 
 ENV GOPATH /workspace/go
 
