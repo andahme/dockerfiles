@@ -24,5 +24,6 @@ This project aims to provide easy to use **developer**/**development** focused *
 * Do not specify a runtime user.
 
 ##### Other
-* Can always execute `bash` with command override.
+* Can always execute **bash** using command override.
+  * **NOTE**: Perform **Environment Variable** configuration mapping before starting bash.
 
