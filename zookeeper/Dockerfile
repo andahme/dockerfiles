@@ -26,7 +26,7 @@ RUN chmod 777 /opt/conf
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/openjdk-jre:${INPUT_JAVA_MAJOR} AS zookeeper
+FROM ${INPUT_DOCKER_REGISTRY}/openjdk-jre:${INPUT_JAVA_MAJOR}-base AS zookeeper
 
 ARG INPUT_ZOOKEEPER_VERSION
 
