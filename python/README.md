@@ -4,16 +4,15 @@
 
 ### Python REPL
 ```bash
-docker run -it --rm \
+docker run -it --rm --name python \
   andahme/python
 ```
 
 ### Bash Shell w/Mounted Workspace
 ```bash
-docker run -it --rm \
+docker run -it --rm --name python \
   --volume ${PWD}:/workspace \
-  andahme/python \
-  bash
+  andahme/python bash
 ```
 
 ## Notes
