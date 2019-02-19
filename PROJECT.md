@@ -18,7 +18,8 @@ This project aims to provide easy to use **developer**/**development** focused *
   * **NOTE**: This may require overriding log4j.properties or similar.
 
 ##### Base Images
-* Base `andahme/debian` is not modified in any way (see [debian/README.md](debian/README.md)).  
+* Base `andahme/debian` is not modified in any way (see [debian/README.md](debian/README.md)).
+* Designate with **Dockerfile.base**.
 * Do not declare volumes.
 * Do not specify a runtime user.
 
