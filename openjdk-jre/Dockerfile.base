@@ -6,7 +6,7 @@ ARG INPUT_JAVA_MAJOR=11
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/debian:testing AS openjdk-jre
+FROM ${INPUT_DOCKER_REGISTRY}/debian:base AS base
 
 ARG INPUT_DEBIAN_ARCH
 
