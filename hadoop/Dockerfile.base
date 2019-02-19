@@ -9,7 +9,7 @@ ARG HADOOP_ARTIFACT=http://apache.spinellicreations.com/hadoop/common/hadoop-${I
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/debian:testing AS distribution
+FROM ${INPUT_DOCKER_REGISTRY}/debian:base AS distribution
 
 ARG HADOOP_ARTIFACT
 

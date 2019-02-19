@@ -9,7 +9,7 @@ ARG ZOOKEEPER_ARTIFACT=http://apache.mirrors.tds.net/zookeeper/zookeeper-${INPUT
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/debian:testing AS distribution
+FROM ${INPUT_DOCKER_REGISTRY}/debian:base AS distribution
 
 ARG ZOOKEEPER_ARTIFACT
 

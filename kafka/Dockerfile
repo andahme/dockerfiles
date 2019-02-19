@@ -11,7 +11,7 @@ ARG KAFKA_ARTIFACT=http://apache.osuosl.org/kafka/${INPUT_KAFKA_VERSION}/kafka_$
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/debian:testing AS distribution
+FROM ${INPUT_DOCKER_REGISTRY}/debian:base AS distribution
 
 ARG KAFKA_ARTIFACT
 
