@@ -24,7 +24,7 @@ RUN mv /opt/etc/hadoop /etc/hadoop && \
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/openjdk-jre:${INPUT_JAVA_MAJOR}-base AS hadoop
+FROM ${INPUT_DOCKER_REGISTRY}/openjdk-jre:${INPUT_JAVA_MAJOR}-base AS base
 
 ARG INPUT_HADOOP_VERSION
 
