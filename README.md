@@ -1,5 +1,7 @@
 ## andahme/dockerfiles
-This project aims to provide easy to use **developer**/**development** focused **Docker Images**. More detail can be found in [PROJECT.md](https://github.com/andahme/dockerfiles/blob/master/PROJECT.md).
+This project aims to provide easy to use **developer**/**development** focused **Docker Images**.
+
+More information can be found in [PROJECT.md](PROJECT.md).
 
 
 ### Applications
