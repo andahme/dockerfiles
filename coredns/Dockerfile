@@ -31,10 +31,9 @@ COPY Corefile /etc/coredns/Corefile
 RUN useradd --comment "CoreDNS Process User" --system --uid 511 coredns
 
 
-VOLUME [ "/etc/coredns" ]
-
-
-USER coredns
+WORKDIR /etc/coredns
 
 CMD [ "coredns", "-conf", "/etc/coredns/Corefile", "-dns.port", "5353" ]
+
+USER coredns
 
