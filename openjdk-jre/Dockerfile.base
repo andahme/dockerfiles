@@ -16,6 +16,8 @@ ARG INPUT_JAVA_MAJOR
 ENV JAVA_HOME /usr/lib/jvm/java-${INPUT_JAVA_MAJOR}-openjdk-${INPUT_DEBIAN_ARCH}
 
 
+RUN mkdir -p /usr/share/man/man1
+
 RUN apt-get update && \
     apt-get install --yes --no-install-recommends openjdk-${INPUT_JAVA_MAJOR}-jre-headless
 
