@@ -1,0 +1,11 @@
+ARG INPUT_DOCKER_REGISTRY=andahme
+
+
+FROM ${INPUT_DOCKER_REGISTRY}/spark:base AS k8s
+
+
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+
+
+ENTRYPOINT [ "/docker-entrypoint.sh" ]
+
