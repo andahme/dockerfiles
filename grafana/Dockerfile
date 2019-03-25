@@ -9,9 +9,9 @@ EXPOSE 3000
 RUN apt-get update && \
     apt-get install --yes apt-transport-https curl gnupg
 
-RUN curl https://packagecloud.io/gpg.key | apt-key add -
+RUN curl https://packages.grafana.com/gpg.key | apt-key add -
 
-RUN echo deb https://packagecloud.io/grafana/stable/debian/ stretch main > /etc/apt/sources.list.d/grafana.list
+RUN echo deb https://packages.grafana.com/oss/deb stable main > /etc/apt/sources.list.d/grafana.list
 
 RUN apt-get update && \
     apt-get install --yes grafana
