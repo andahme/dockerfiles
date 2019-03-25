@@ -1,7 +1,7 @@
 ARG INPUT_DOCKER_REGISTRY=andahme
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/debian:testing AS grafana
+FROM ${INPUT_DOCKER_REGISTRY}/debian:base AS grafana
 
 EXPOSE 3000
 
@@ -26,7 +26,7 @@ RUN sed -i \
 VOLUME /var/lib/grafana
 
 
-USER grafana
-
 CMD [ "grafana-server", "--config=/etc/grafana/grafana.ini", "--homepath=/usr/share/grafana" ]
+
+USER grafana
 
