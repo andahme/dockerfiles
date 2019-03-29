@@ -2,7 +2,7 @@ ARG INPUT_JAVA_MAJOR=8
 
 
 
-FROM andahme/openjdk:${INPUT_JAVA_MAJOR}-jre AS jenkins
+FROM andahme/openjdk-jre:${INPUT_JAVA_MAJOR}-base AS jenkins
 
 
 RUN DEBIAN_FRONTEND=noninteractive \
