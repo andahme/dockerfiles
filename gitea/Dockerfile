@@ -35,7 +35,7 @@ RUN useradd --comment "Gitea Process User" --create-home --uid 1011 gitea && \
     chown -R gitea /home/gitea/gitea-repositories /var/lib/gitea
 
 
-VOLUME /var/lib/gitea
+#VOLUME /var/lib/gitea
 
 
 WORKDIR /var/lib/gitea
