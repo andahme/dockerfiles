@@ -4,7 +4,7 @@ if [ $1 == "postgres" -a ! -d ${PGDATA} ]; then
     if [ -z """${PGPASSWORD}""" -a -t 0 ]; then
         initdb --auth md5 --username ${PGUSER:-postgres} --pwprompt
     else
-        echo """${PGPASSWORD}""" > /tmp/pgpassword
+        echo """${PGPASSWORD:-2345}""" > /tmp/pgpassword
         initdb --auth md5 --username ${PGUSER:-postgres} --pwfile=/tmp/pgpassword
         rm -f /tmp/pgpassword
     fi
