@@ -19,10 +19,15 @@ ARG INPUT_SPARK_VERSION
 ADD ${SPARK_ARTIFACT} /tmp/spark-${INPUT_SPARK_VERSION}.tar.gz
 
 RUN tar -zxf /tmp/spark-${INPUT_SPARK_VERSION}.tar.gz -C /opt --strip-component=1 \
+# Workaround: https://issues.apache.org/jira/browse/SPARK-28921
+    --exclude=jars/kubernetes-client-* \
     --exclude=bin/pyspark* --exclude=python \
     --exclude=bin/sparkR* --exclude=R \
     --exclude=bin/*.cmd \
     --exclude=sbin
+
+# Workaround: https://issues.apache.org/jira/browse/SPARK-28921
+ADD https://repo1.maven.org/maven2/io/fabric8/kubernetes-client/4.4.2/kubernetes-client-4.4.2.jar /opt/jars
 
 RUN mkdir /opt/logs /opt/work && \
     chmod -R 777 /opt/conf /opt/logs /opt/work
