@@ -16,7 +16,7 @@ ARG INPUT_JAVA_MAJOR
 ENV JAVA_HOME /usr/lib/jvm/java-${INPUT_JAVA_MAJOR}-openjdk-${INPUT_DEBIAN_ARCH}
 
 
-RUN echo deb http://deb.debian.org/debian stretch main > /etc/apt/sources.list.d/stretch.list
+RUN if [ ${INPUT_JAVA_MAJOR} -eq 8 ]; then echo deb http://deb.debian.org/debian stretch main > /etc/apt/sources.list.d/stretch.list; fi
 
 RUN mkdir -p /usr/share/man/man1
 
