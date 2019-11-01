@@ -1,3 +1,5 @@
+ARG INPUT_DOCKER_REGISTRY=andahme
+
 ARG INPUT_JAVA_MAJOR=8
 
 ARG INPUT_ELASTIC_VERSION=6.2.3
@@ -6,7 +8,7 @@ ARG ELASTIC_ARTIFACT=https://artifacts.elastic.co/downloads/elasticsearch/elasti
 
 
 
-FROM andahme/debian:base AS distribution
+FROM ${INPUT_DOCKER_REGISTRY}/debian:base AS distribution
 
 ARG ELASTIC_ARTIFACT
 
@@ -20,7 +22,7 @@ RUN mkdir -p /opt/logs && \
 
 
 
-FROM andahme/openjdk:${INPUT_JAVA_MAJOR}-jre AS elastic
+FROM ${INPUT_DOCKER_REGISTRY}/openjdk:${INPUT_JAVA_MAJOR}-jre AS elastic
 
 ARG INPUT_ELASTIC_VERSION
 

@@ -1,10 +1,12 @@
+ARG INPUT_DOCKER_REGISTRY=andahme
+
 ARG INPUT_KIBANA_VERSION=6.2.3
 
 ARG KIBANA_ARTIFACT=https://artifacts.elastic.co/downloads/kibana/kibana-${INPUT_KIBANA_VERSION}-linux-x86_64.tar.gz
 
 
 
-FROM andahme/debian:base AS distribution
+FROM ${INPUT_DOCKER_REGISTRY}/debian:base AS distribution
 
 ARG KIBANA_ARTIFACT
 
@@ -16,7 +18,7 @@ RUN tar -zxf /tmp/kibana.tar.gz -C /opt --strip-component=1 && \
 
 
 
-FROM andahme/debian:base AS kibana
+FROM ${INPUT_DOCKER_REGISTRY}/debian:base AS kibana
 
 ARG INPUT_KIBANA_VERSION
 
