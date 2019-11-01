@@ -4,7 +4,7 @@ ARG KIBANA_ARTIFACT=https://artifacts.elastic.co/downloads/kibana/kibana-${INPUT
 
 
 
-FROM andahme/debian:testing AS distribution
+FROM andahme/debian:base AS distribution
 
 ARG KIBANA_ARTIFACT
 
@@ -16,7 +16,7 @@ RUN tar -zxf /tmp/kibana.tar.gz -C /opt --strip-component=1 && \
 
 
 
-FROM andahme/debian:testing AS kibana
+FROM andahme/debian:base AS kibana
 
 ARG INPUT_KIBANA_VERSION
 
