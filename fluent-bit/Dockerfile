@@ -6,7 +6,7 @@ ARG FLUENTBIT_ARTIFACT=https://github.com/fluent/fluent-bit/archive/v${INPUT_FLU
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/build-essential:testing AS distribution
+FROM ${INPUT_DOCKER_REGISTRY}/build-essential:base AS distribution
 
 ARG FLUENTBIT_ARTIFACT
 
@@ -24,7 +24,7 @@ RUN cmake .. && make
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/debian:testing AS fluent-bit
+FROM ${INPUT_DOCKER_REGISTRY}/debian:base AS fluent-bit
 
 EXPOSE 24224
 

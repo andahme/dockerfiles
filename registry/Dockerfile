@@ -1,14 +1,14 @@
 ARG INPUT_DOCKER_REGISTRY=andahme
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/golang:testing AS distribution
+FROM ${INPUT_DOCKER_REGISTRY}/golang:base AS distribution
 
 
 RUN go get github.com/docker/distribution/cmd/registry
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/debian:testing AS registry
+FROM ${INPUT_DOCKER_REGISTRY}/debian:base AS registry
 
 EXPOSE 5000
 

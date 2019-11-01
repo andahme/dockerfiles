@@ -9,7 +9,7 @@ ARG NODE_ARTIFACT=https://nodejs.org/dist/v${INPUT_NODE_VERSION}/node-v${INPUT_N
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/debian:testing AS distribution
+FROM ${INPUT_DOCKER_REGISTRY}/debian:base AS distribution
 
 ARG NODE_ARTIFACT
 
@@ -20,7 +20,7 @@ RUN tar -zxf /tmp/node.tar.gz -C /opt --strip-components=1
 
 
 
-FROM ${INPUT_DOCKER_REGISTRY}/build-essential:testing AS node
+FROM ${INPUT_DOCKER_REGISTRY}/build-essential:base AS node
 
 ARG INPUT_NODE_VERSION
 
