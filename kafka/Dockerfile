@@ -51,7 +51,7 @@ RUN sed -i "s/^\(log\.dirs=\).*/\1\/var\/lib\/kafka/g" ${KAFKA_HOME}/config/serv
 COPY log4j.properties ${KAFKA_HOME}/config/log4j.properties
 
 RUN mkdir /var/lib/kafka && \
-    chmod 777 /var/lib/kafka
+    chown kafka /var/lib/kafka
 
 
 VOLUME /var/lib/kafka
