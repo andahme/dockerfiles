@@ -22,8 +22,6 @@ RUN tar -zxf /tmp/zookeeper.tar.gz -C /opt --strip-component=1 \
     --exclude=dist-maven \
     --exclude=src
 
-RUN chmod 777 /opt/conf
-
 
 
 FROM ${INPUT_DOCKER_REGISTRY}/openjdk-jre:${INPUT_JAVA_MAJOR}-base AS zookeeper
@@ -32,9 +30,6 @@ ARG INPUT_ZOOKEEPER_VERSION
 
 
 EXPOSE 2181
-
-
-ENV ZOOKEEPER_MYID 1
 
 
 ENV ZOOKEEPER_HOME /opt/zookeeper-${INPUT_ZOOKEEPER_VERSION}
@@ -49,10 +44,14 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 RUN useradd --comment "ZooKeeper User" --create-home --uid 1011 zookeeper
 
-RUN sed "s/^\\(dataDir=\\).*/\1\/var\/lib\/zookeeper/g" ${ZOOKEEPER_HOME}/conf/zoo_sample.cfg > ${ZOOKEEPER_HOME}/conf/zoo.cfg
+RUN sed \
+      -e "s/^\\(dataDir=\\).*/\1\/var\/lib\/zookeeper/g" \
+      -e "s/^\\(initLimit=\\).*/\130/g" \
+      ${ZOOKEEPER_HOME}/conf/zoo_sample.cfg \
+      > ${ZOOKEEPER_HOME}/conf/zoo.cfg
 
 RUN mkdir /var/lib/zookeeper && \
-    chmod 777 /var/lib/zookeeper
+    chown zookeeper ${ZOOKEEPER_HOME}/conf/zoo.cfg /var/lib/zookeeper
 
 
 VOLUME /var/lib/zookeeper
