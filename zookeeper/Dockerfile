@@ -5,7 +5,7 @@ ARG INPUT_JAVA_MAJOR=8
 ARG INPUT_ZOOKEEPER_VERSION=3.5.6
 
 
-ARG ZOOKEEPER_ARTIFACT=http://apache.mirrors.tds.net/zookeeper/zookeeper-${INPUT_ZOOKEEPER_VERSION}/zookeeper-${INPUT_ZOOKEEPER_VERSION}.tar.gz
+ARG ZOOKEEPER_ARTIFACT=http://apache.mirrors.tds.net/zookeeper/zookeeper-${INPUT_ZOOKEEPER_VERSION}/apache-zookeeper-${INPUT_ZOOKEEPER_VERSION}.tar.gz
 
 
 
