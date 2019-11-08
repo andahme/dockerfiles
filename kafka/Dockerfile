@@ -46,7 +46,7 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 RUN useradd --comment "Kafka User" --create-home --uid 1011 kafka
 
-RUN sed -i "s/^\\(log.dirs=\\).*/\1\/var\/lib\/kafka/g" ${KAFKA_HOME}/config/server.properties
+RUN sed -i "s/^\(log\.dirs=\).*/\1\/var\/lib\/kafka/g" ${KAFKA_HOME}/config/server.properties
 
 COPY log4j.properties ${KAFKA_HOME}/config/log4j.properties
 
