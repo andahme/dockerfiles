@@ -14,7 +14,7 @@ if [ -f /var/lib/zookeeper/myid ]; then
 elif [ ${ZOOKEEPER_MYID} ]; then
     echo "ANDAHME Applying Configuration - ZOOKEEPER_MYID (${ZOOKEEPER_MYID})"
     echo "${ZOOKEEPER_MYID}" > /var/lib/zookeeper/myid
-elif [[ ${HOSTNAME##*-} =~ '^[0-9]+$' && ${HOSTNAME%-*} == $(hostname -f | cut -d'.' -f2) ]]; then
+elif [[ ${HOSTNAME##*-} =~ ^[0-9]+$ && ${HOSTNAME%-*} == $(hostname -f | cut -d'.' -f2) ]]; then
     ZOOKEEPER_MYID=${HOSTNAME##*-}
     echo "ANDAHME Applying Configuration - ZOOKEEPER_MYID (${ZOOKEEPER_MYID})"
     echo "${ZOOKEEPER_MYID}" > /var/lib/zookeeper/myid
