@@ -1,7 +1,9 @@
 ARG INPUT_DOCKER_REGISTRY=andahme
 
+ARG INPUT_SPARK_VERSION=2.4.7
 
-FROM ${INPUT_DOCKER_REGISTRY}/spark:base AS k8s
+
+FROM ${INPUT_DOCKER_REGISTRY}/spark:${INPUT_SPARK_VERSION}-base AS k8s
 
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
