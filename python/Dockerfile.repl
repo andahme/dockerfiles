@@ -8,7 +8,7 @@ FROM ${INPUT_DOCKER_REGISTRY}/python:base AS python
 ENV PATH /home/python/.local/bin:${PATH}
 
 
-RUN useradd --comment "Python User" --create-home --uid 1011 python && \
+RUN useradd --comment "Python User" --create-home --uid 1012 python && \
     mkdir -p /home/python/.cache /home/python/.local && \
     chown -R python:python /home/python/.local
 
